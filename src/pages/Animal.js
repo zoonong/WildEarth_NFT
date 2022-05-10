@@ -129,7 +129,7 @@ export default function Animal() {
         <br></br>
         <br></br>
 
-        <h2>{img_name}의 NFT 보러가기</h2>
+        <h2>{img_name}의 NFT 보러가기 ㄱㄱㄱ</h2>
         <div className='Animal_frame_bottom'>
             <div className='A_nft_card'>
                     <Card>
