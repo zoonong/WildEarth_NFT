@@ -1,0 +1,116 @@
+.App {
+    text-align: center;
+    font-family: "ROKABold";
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+.Animal_frame_top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .A_img_card{
+    margin-right: 10%;
+    margin-left: 10%;
+    border: 2px solid #E0FACC;
+  }
+  
+  .A_txt_card{
+    margin-right: 10%;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+  }
+  
+  
+  .A_namebox{
+    z-index: 3;
+    position: absolute;
+    bottom: 100%;
+  }
+
+  .A_info_card{
+    align-items: center;
+    justify-content: center;
+  }
+
+  table{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #E0FACC;
+    text-align: left;
+  }
+
+  th{
+      border: 2px solid #444444;
+      padding: 5px;
+      background: #E0FACC;
+  }
+
+  td {
+    border: 2px solid #444444;
+    padding: 5px;
+  }
+  
+  .Animal_frame_bottom{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 100px;
+  }
+
+  .A_nft_card{
+      width: 256px;
+      height: 256px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: 2px solid #E0FACC;
+  }
+
+
+  .App-link {
+    color: #61dafb;
+  }
+  
+  #DropdownAnimalname{
+    background: #E0FACC;
+  } 
