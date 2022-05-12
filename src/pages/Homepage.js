@@ -11,7 +11,7 @@ function Homepage() {
         <>
         <div className="homepageFrameTop">
             <img className="earthLogo" src="\img\earth.png" />
-
+            
             <div className="A_img_div">
                 <Carousel variant="dark" className="img_slide">
                     <Carousel.Item>
@@ -37,6 +37,7 @@ function Homepage() {
             </div>
         </div>
         <br></br>
+        <h1>Homepage</h1>
         <h1>새로운 NFT 보러가기</h1>
         <br></br>    
         <div className="homepageFrameBottom">
