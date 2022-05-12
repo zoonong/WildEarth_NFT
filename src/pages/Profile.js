@@ -20,6 +20,7 @@ function Profile() {
                 <div className='profileNo'>
                     #{profile_no}
                 </div>
+                <h1>Profile page</h1>
                 <div className='wallet'>
                     WALLET
                 </div>
