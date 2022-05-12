@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import 'D:/2022캡디/react_web/main/src/pages/pagecss/Homepage.css';
+import './/pagecss/Homepage.css';
 import React from 'react';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card } from 'react-bootstrap';
 
