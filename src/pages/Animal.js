@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'D:/2022캡디/react_web/main/src/pages/pagecss/Animal.css';
+import './/pagecss/Animal.css';
 import { useState } from 'react';
 import { Carousel, Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
 
@@ -129,7 +129,7 @@ export default function Animal() {
         <br></br>
         <br></br>
 
-        <h2>{img_name}의 NFT 보러가기 ㄱㄱㄱ</h2>
+        <h2>{img_name}의 NFT 보러가기</h2>
         <div className='Animal_frame_bottom'>
             <div className='A_nft_card'>
                     <Card>

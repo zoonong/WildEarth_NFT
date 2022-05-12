@@ -1,0 +1,100 @@
+.App {
+    text-align: center;
+    font-family: "ROKABold";
+}
+
+.profileBack {
+    width: 100%;
+    height: 1000px;
+    display: flex;
+
+}
+
+.profileLeft {
+    margin-top: 50px;
+    width: 25%;
+    height: 100%;
+    display: table;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    border: 1px solid #f0f0f0;
+}
+
+.proflieName{
+    margin-top: 40%;
+    width: 100%;
+    height: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "ROKABold";
+}
+
+.profileNo{
+    margin-top: 15px;
+    width: 100%;
+    height: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "ROKABold";
+}
+
+.wallet{
+    margin-top: 20%;
+    width: 100%;
+    height: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "ROKABold";
+}
+
+.walletAddress{
+    margin-top: 15px;
+    width: 100%;
+    height: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "ROKABold";
+}
+
+.profileRight{
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+.tapLine{
+    margin-top: 16px;
+    width: 100%;
+    height: 3%;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: large;
+    font-family: "ROKABold";
+
+}
+
+.Animal_frame_bottom{
+    width: 100%;
+    display: table;
+    padding: 3%;
+    padding-left: 5%;
+}
+
+.row0{
+    width: 100%;
+    display: flex;
+    margin: 10px;
+    align-content: center;
+}
+
+.row-10{
+    width: 100%;
+    display: flex;
+    margin: 10px;
+}
+
+.col-md-2{
+    margin:1.5%;
+}
