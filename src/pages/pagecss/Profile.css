@@ -5,7 +5,6 @@
 
 .profileBack {
     width: 100%;
-    height: 1000px;
     display: flex;
 
 }
@@ -13,13 +12,13 @@
 .profileLeft {
     margin-top: 50px;
     width: 25%;
-    height: 100%;
     display: table;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: space-between;
-    border: 1px solid #f0f0f0;
+    background-color: #f8fdf8;
+    border: 1px solid #fdf8f0;
 }
 
 .proflieName{
@@ -61,33 +60,43 @@
 .profileRight{
     margin-top: 50px;
     width: 100%;
-    height: 100%;
-    display: table;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .tapLine{
-    margin-top: 16px;
+    margin-top: 3%;
+    margin-left: 8%;
     width: 100%;
     height: 3%;
-    border-bottom: 1px solid #f0f0f0;
     font-size: large;
     font-family: "ROKABold";
 
 }
 
-.row0{
-    width: 100%;
+.profileList{
     display: flex;
-    margin: 10px;
+    flex-wrap: wrap;
     align-content: center;
+    justify-content: center;
+    padding: 5%;
+
 }
 
-.row-10{
-    width: 100%;
+.profileImg{
+    width: 20%;
+    margin:2%
+}
+.profileCardBody {
+    height: 100%;
     display: flex;
-    margin: 10px;
+    justify-content: center;
 }
 
-.col-md-2{
-    margin:1.5%;
+.profileCard {
+    align-content: center;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20%;
+    box-shadow: 2px 2px 2px 2px gray;
 }
