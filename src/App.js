@@ -23,9 +23,10 @@ function App() {
           WildEarth</Navbar.Brand>
           <Nav className = "me-auto">
             <Nav.Link href="Animal">Animal</Nav.Link>
-            <Nav.Link href="Buy">Explore</Nav.Link>
+            <Nav.Link href="Explore">Explore</Nav.Link>
             <Nav.Link href="Profile">Profile</Nav.Link>
             <Nav.Link href="Login">Login</Nav.Link>
+            <Nav.Link href="Buy">Buy</Nav.Link>
           </Nav>
           </Container>
         </Navbar>
@@ -33,9 +34,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Homepage/>}/>
             <Route path='Animal' element={<Animal/>}/>
-            <Route path='buy' element={<Buy/>}/>
+            <Route path='Explore' element={<Explore/>}/>
             <Route path='Profile' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
+            <Route path='Buy' element={<Buy/>}/>
           </Routes>
         </BrowserRouter>
        
