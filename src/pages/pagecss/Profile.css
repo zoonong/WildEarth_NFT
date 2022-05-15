@@ -75,13 +75,6 @@
 
 }
 
-.Animal_frame_bottom{
-    width: 100%;
-    display: table;
-    padding: 3%;
-    padding-left: 5%;
-}
-
 .row0{
     width: 100%;
     display: flex;
