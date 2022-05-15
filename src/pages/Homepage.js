@@ -37,7 +37,6 @@ function Homepage() {
             </div>
         </div>
         <br></br>
-        <h1>Homepage</h1>
         <h1>새로운 NFT 보러가기</h1>
         <br></br>    
         <div className="homepageFrameBottom">
