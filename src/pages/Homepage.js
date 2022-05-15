@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './/pagecss/Homepage.css';
 import React from 'react';
+import { NavLink,BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card } from 'react-bootstrap';
+import Buy from './Buy';
 
 function Homepage() {
     
@@ -40,46 +42,46 @@ function Homepage() {
         <h1>새로운 NFT 보러가기</h1>
         <br></br>    
         <div className="homepageFrameBottom">
-            <div className='A_nft_card'>
-                <Card>
-                    <Card.Img variant="bottom" src={img_src[1]} />
-                    <Card.Body>
-                    </Card.Body>
-                </Card>
-            </div>
+                <div className='home_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src[1]} />
+                        <Card.Body>
+                        </Card.Body>
+                    </Card>
+                </div>
 
-            <div className='A_nft_card'>
-                <Card>
-                    <Card.Img variant="bottom" src={img_src[1]} />
-                    <Card.Body>
-                    </Card.Body>
-                </Card>
-            </div>
+                <div className='home_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src[1]} />
+                        <Card.Body>
+                        </Card.Body>
+                    </Card>
+                </div>
 
-            <div className='A_nft_card'>
-                <Card>
-                    <Card.Img variant="bottom" src={img_src[1]} />
-                    <Card.Body>
-                    </Card.Body>
-                </Card>
-            </div>
+                <div className='home_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src[1]} />
+                        <Card.Body>
+                        </Card.Body>
+                    </Card>
+                </div>
 
-            <div className='A_nft_card'>
-                <Card>
-                    <Card.Img variant="bottom" src={img_src[1]} />
-                    <Card.Body>
-                    </Card.Body>
-                </Card>
-            </div>
+                <div className='home_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src[1]} />
+                        <Card.Body>
+                        </Card.Body>
+                    </Card>
+                </div>
 
-            <div className='A_nft_card'>
-                <Card>
-                    <Card.Img variant="bottom" src={img_src[1]} />
-                    <Card.Body>
-                    </Card.Body>
-                </Card>
+                <div className='home_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src[1]} />
+                        <Card.Body>
+                        </Card.Body>
+                    </Card>
+                </div>
             </div>
-        </div>
         </>    
     );
 }
