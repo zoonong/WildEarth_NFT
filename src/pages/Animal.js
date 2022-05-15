@@ -130,6 +130,7 @@ export default function Animal() {
         <br></br>
 
         <h2>{img_name}의 NFT 보러가기</h2>
+        <br></br>
         <div className='Animal_frame_bottom'>
             <div className='A_nft_card'>
                     <Card>

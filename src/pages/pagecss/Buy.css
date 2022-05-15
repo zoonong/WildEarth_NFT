@@ -1,0 +1,21 @@
+.Buy_frame_top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #E0FACC;
+}
+
+
+.NFT_img_card{
+    border: 2px solid #E0FACC;
+    margin-right: 20px;
+}
+
+.NFT_info_card{
+    margin-left: 20px;
+    align-items: center;
+    justify-content: center;
+}
