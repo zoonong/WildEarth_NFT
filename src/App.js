@@ -11,6 +11,7 @@ import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Buy from './pages/Buy';
+import Mint from './pages/Mint';
 
 function App() {
   let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
@@ -27,7 +28,6 @@ function App() {
             <Nav.Link href="Explore">Explore</Nav.Link>
             <Nav.Link href="Profile">Profile</Nav.Link>
             <Nav.Link href="Login">Login</Nav.Link>
-            <Nav.Link href="Buy">Buy</Nav.Link>
           </Nav>
           </Container>
         </Navbar>
@@ -39,6 +39,7 @@ function App() {
             <Route path='Profile' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
             <Route path='Buy' element={<Buy/>}/>
+            <Route path='Mint' element={<Mint/>}/>
           </Routes>
         </BrowserRouter>
        

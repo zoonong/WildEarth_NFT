@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './/pagecss/Profile.css';
 import { useState } from 'react';
-import { Carousel, Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
+import { Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
+import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
+import Mint from './Mint';
 
 var profile_name = 'DEFAULT_NAME'
 var profile_no = '0000'
 var wallet_address = '0x00000000'
 
+let back_color = {background:"#E0FACC"}
 let img_src = ["\\img\\bear.png", "\\img\\owl.png"]
 
 function Profile() {
@@ -14,6 +17,10 @@ function Profile() {
     let [img_name,change_name] = useState("반달가슴곰");
     let [nft_price,change_price] = useState("10000");
     let [nft_no,change_no] = useState("0000");
+
+    function Move_to_mint(e) {
+        window.location.replace("/Mint")
+    }
 
     return (
         <>
@@ -30,6 +37,15 @@ function Profile() {
                 </div>
                 <div className='walletAddress'>
                     {wallet_address}
+                </div>
+                <br></br>
+                <br></br>
+                <div className='MintLink'>
+                    <Link to={Mint}>
+                        <Button  variant="light" style={back_color} onClick= {Move_to_mint}>
+                            Mint New NFT
+                        </Button>
+                    </Link>
                 </div>
             </div>
             <div className='profileRight'>
