@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Carousel, Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
 
 export default function Buy() {
-    let back_color = {background:"#E0FACC"}
+    let back_color = {background:"#0077a3"}
     let [img_src,change_img] = useState("\\img\\bear.png");
     let [img_name,change_name] = useState("반달가슴곰");
     let [img_info,change_info] = useState(['ASIATIC BLACK BEAR', '25','40~200','120-190','약 25000','멸종 취약종']); //학명,예상 수명, 몸무게, 길이, 개체수
@@ -29,11 +29,10 @@ export default function Buy() {
                 <div className='NFT_info_card'>
                 <Card>
                     <Card.Header style={back_color}>
-                        소개  
+                        {img_name} NFT의 상세정보
                     </Card.Header>
                     <br></br>
                     <Card.Body>
-                        <Card.Title>{img_name}(을)를 소개합니다!</Card.Title>
                         <br></br>
                         <Card.Text>
                             <table>
@@ -63,7 +62,7 @@ export default function Buy() {
                                 </tr>
                             </table>
                         </Card.Text>
-                        <Button  variant="light" style={back_color} onClick={() => window.open(img_Link, '_blank')}>
+                        <Button  variant="light" style={back_color}>
                             구매하기
                         </Button>
                     </Card.Body>
@@ -71,6 +70,31 @@ export default function Buy() {
                 </div>
 
             </div>
+
+            <br></br>
+        <br></br>
+
+        <h2>{img_name}과 관련된 더 많은 NFT</h2>
+        <br></br>
+        <div className='Buy_frame_bottom'>
+            <div className='Buy_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src} />
+                    </Card>
+            </div>
+
+            <div className='Buy_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src} />
+                    </Card>
+            </div>
+
+            <div className='Buy_nft_card'>
+                    <Card>
+                        <Card.Img variant="bottom" src={img_src} />
+                    </Card>
+            </div>
+        </div>
         </div>                              
     )
 }

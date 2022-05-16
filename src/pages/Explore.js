@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import React from 'react';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card } from 'react-bootstrap';
+import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import './/pagecss/Explore.css';
+import Buy from './Buy';
 
 
 
@@ -10,6 +12,11 @@ function Explore() {
     let [img_name,change_name] = useState("반달가슴곰");
     let [nft_price,change_price] = useState("10000");
     let [nft_no,change_no] = useState("0000");
+
+    function Move_to_Buy(e) {
+        window.location.replace("/Buy")
+    }
+
 
     return (
         <>
@@ -22,8 +29,10 @@ function Explore() {
                 <div className='rankingList'>
                 <div className='rankingImg'>
                     <Card className='rankingCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='marketCardBody'>
+                    <Link to={Buy}>
+                        <Card.Img variant="bottom" src={img_src} onClick={Move_to_Buy}/>
+                    </Link>
+                        <Card.Body className='marketCardBody'>
                                 <Card.Text style={{fontWeight:"bold"}}>
                                     {img_name}
                                     
