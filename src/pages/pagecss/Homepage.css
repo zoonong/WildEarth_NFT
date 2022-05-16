@@ -1,65 +1,32 @@
-.App {
-    text-align: center;
-    font-family: "ROKABold";
-  }
   
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .homepageFrameTop{
-    margin-top: 100px;
+  .topBlank{
+    height: 74px;
     width: 100%;
-    height: 60%;
+    box-shadow: 3px 3px;
+  }
+  .homepageFrameTop{
+    width: 100%;
+    height: 30%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-content: center;
     justify-content: center;
-    margin-bottom: 200px;
+    margin-bottom: 7%;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .earthLogo{
-    display: block;
-    width: 400px;
-    height: 400px;
-    margin-right: 10%;
+  .A_img_div{
+    width: 100%;
   }
 
-  .A_img_div{
-    display: block;
-    width: 400px;
-    height: 400px;
-    margin-left: 10%;
+  .homepageFrameMid {
+    height: 100%;
+    font-size: 200%;
+    font-weight: bold;
+    margin-bottom: 7%;
+
   }
 
   .homepageFrameBottom {

@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import React from 'react';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar,Container, Nav, Card } from 'react-bootstrap';
 import Animal from './pages/Animal';
@@ -12,15 +13,15 @@ import Login from './pages/Login';
 import Buy from './pages/Buy';
 
 function App() {
-  let nav_st = {background:"#E0FACC", fontWeight: 'bold'}
+  let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
   return (
     <div className="App">
         <BrowserRouter>
-        <Navbar variant="light" fixed='top' style={nav_st}>
+        <Navbar className="navBar" variant="light" fixed='top' style={nav_st}>
           <Container>
-          <Navbar.Brand href="/">
-          <img src = "\img\logo_cap2.png" alt={logo} width = '100' height= '60' marginRight = '20px' textAlign = 'center'/>
-          WildEarth</Navbar.Brand>
+          <Navbar.Brand href="/" className="navLogo">
+            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
+          </Navbar.Brand>
           <Nav className = "me-auto">
             <Nav.Link href="Animal">Animal</Nav.Link>
             <Nav.Link href="Explore">Explore</Nav.Link>

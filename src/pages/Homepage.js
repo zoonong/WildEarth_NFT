@@ -12,31 +12,29 @@ function Homepage() {
     return (
         <>
         <div className="homepageFrameTop">
-            <img className="earthLogo" src="\img\earth.png" />
-            
             <div className="A_img_div">
                 <Carousel variant="dark" className="img_slide">
                     <Carousel.Item>
-                        <img className="d-block w-100" src="\img\bear.png" />
+                        <img className="d-block w-100" src="\img\main_img_1.png" />
                     </Carousel.Item>
 
                     <Carousel.Item>
-                        <img className="d-block w-100" src="\img\owl.png" />
+                        <img className="d-block w-100" src="\img\main_img_2.png" />
                     </Carousel.Item>
 
                     <Carousel.Item>
-                        <img className="d-block w-100" src="\img\monkey.png" />
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                        <img className="d-block w-100" src="\img\cheetah.png" />
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                        <img className="d-block w-100" src="\img\seal.png" />
+                        <img className="d-block w-100" src="\img\main_img_3.png" />
                     </Carousel.Item>
                 </Carousel>
             </div>
+        </div>
+        <div className='homepageFrameMid'>
+            환경 파괴 어쩌구...<br/>
+            동물들의 터전이 어쩌구...<br/>
+            멸종 위기 어쩌구...<br/>
+            경각심 어쩌구...<br/>
+            Wild Earth는 어쩌구...<br/>
+            NFT를 통해 어쩌구...<br/>
         </div>
         <br></br>
         <h1>새로운 NFT 보러가기</h1>
