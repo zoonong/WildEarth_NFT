@@ -25,8 +25,8 @@ export default function Mint() {
 
             <div className='Mint_form'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>NFT address</Form.Label>
-                    <Form.Control placeholder="NFT_URL" />
+                    <Form.Label>Image address</Form.Label>
+                    <Form.Control placeholder="Image_URL" />
                     <Form.Text className="text-muted">
                         Minting할 NFT URL 입력
                     </Form.Text>
