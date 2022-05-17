@@ -1,4 +1,3 @@
-  
   .topBlank{
     height: 74px;
     width: 100%;
@@ -21,20 +20,19 @@
     width: 100%;
   }
 
+
   .homepageFrameMid {
     height: 100%;
     font-size: 200%;
     font-weight: bold;
     margin-bottom: 7%;
-
   }
 
   .homepageFrameBottom {
-    margin: 0 auto 200px;
-    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 200px;
     width: 80%;
-    height: 400px;
-    box-sizing: border-box;
     background-color: #E0FACC;
     align-items: center;
     justify-content: center;
@@ -43,7 +41,7 @@
 
   .home_nft_card{
     width: 256px;
-    height: 256px;
+    margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
