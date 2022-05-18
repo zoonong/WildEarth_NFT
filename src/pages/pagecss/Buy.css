@@ -9,7 +9,7 @@
 
 
 .NFT_img_card{
-    border: 2px solid #0077a3;
+    border: 2px solid #43BCC6;
     margin-right: 50px;
 }
 
@@ -17,6 +17,30 @@
     margin-left: 50px;
     align-items: center;
     justify-content: center;
+}
+
+.table_B{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #43BCC6;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.th_2 {
+    border: 2px solid #43BCC6;
+    padding: 5px;
+    background: #43BCC6;
+}
+
+.td_2 {
+  border-bottom: 2px solid #43BCC6;
+  padding: 5px;
+}
+
+.NFT_buy_btn {
+    float: right;
 }
 
 .Buy_frame_bottom{
@@ -27,12 +51,12 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    background: #43BCC6;
   }
 
 .Buy_nft_card{
     width: 256px;
-    height: 256px;
     margin-left: 20px;
     margin-right: 20px;
-    border: 2px solid #0077a3;
+    border: 2px solid #43BCC6;
 }
