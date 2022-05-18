@@ -90,29 +90,29 @@ export default function Animal() {
                         <Card.Title>{img_name}(을)를 소개합니다!</Card.Title>
                         <br></br>
                         <Card.Text>
-                            <table>
+                            <table className='table_A'>
                                 <tr>
-                                    <th>학명</th>
-                                    <td>{img_info[0]}</td>
+                                    <th className='th_1'>학명</th>
+                                    <td className='td_1'>{img_info[0]}</td>
                                 </tr>
                                 <tr>
-                                    <th>예상 수명(년)</th>
-                                    <td>{img_info[1]}</td>
+                                    <th className='th_1'>예상 수명(년)</th>
+                                    <td className='td_1'>{img_info[1]}</td>
                                 </tr>
                                 <tr>
-                                    <th>몸무게(kg)</th>
-                                    <td>{img_info[2]}</td>
+                                    <th className='th_1'>몸무게(kg)</th>
+                                    <td className='td_1'>{img_info[2]}</td>
                                 </tr>
                                 <tr>
-                                    <th>몸길이(cm)</th>
-                                    <td>{img_info[3]}</td>
+                                    <th className='th_1'>몸길이(cm)</th>
+                                    <td className='td_1'>{img_info[3]}</td>
                                 </tr>
                                 <tr>
-                                    <th>개체 수(마리)</th>
-                                    <td>{img_info[4]}</td>
+                                    <th className='th_1'>개체 수(마리)</th>
+                                    <td className='td_1'>{img_info[4]}</td>
                                 </tr>
                                 <tr>
-                                    <th>등급</th>
+                                    <th className='th_1'>등급</th>
                                     <td style={info5_st}>{img_info[5]}</td>
                                 </tr>
                             </table>
