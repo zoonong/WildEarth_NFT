@@ -4,7 +4,7 @@ import { useState } from 'react';
 import React from 'react';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Navbar,Container, Nav, Card, Button } from 'react-bootstrap';
+import { Navbar,Container, Nav, Alert, Button } from 'react-bootstrap';
 import Animal from './pages/Animal';
 import Homepage from './pages/Homepage';
 import Explore from './pages/Explore';
@@ -15,21 +15,35 @@ import Mint from './pages/Mint';
 
 import Caver from 'caver-js';
 
-// const ACCESS_KEY_ID = '';
-// const SECRET_ACCESS_KEY = '';
-// const CHAIN_ID = '1001'; //테스트넷
+const ACCESS_KEY_ID = '';
+const SECRET_ACCESS_KEY = '';
+const CHAIN_ID = '1001'; //테스트넷
 
-// const option = {
-//   headers: [
-//     {
-//       name: "Authorization",
-//       value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
-//     },
-//     {name: "x-chain-id", value:CHAIN_ID}
-//   ]
-// }
+const option = {
+  headers: [
+    {
+      name: "Authorization",
+      value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+    },
+    {name: "x-chain-id", value:CHAIN_ID}
+  ]
+}
 
-// const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+
+let account;
+
+async function connect() {
+  const accounts = await window.klaytn.enable();
+  account = accounts[0];
+  caver.klay.getBalance(account)
+      .then(function (balance) {
+          document.getElementById("connectButton").style.visibility = "hidden";
+          document.getElementById("myWallet").innerHTML = `${account}`
+          // document.getElementById("myKlay").innerHTML = `잔액: ${caver.utils.fromPeb(balance, "KLAY")} KLAY`
+      });
+  // await check_status();
+}
 
 function App() {
   let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
@@ -42,17 +56,20 @@ function App() {
             <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
           </Navbar.Brand>
           <Nav className = "me-auto">
+            <Nav.Link variant='secondary' disabled id="myWallet"></Nav.Link>
             <Nav.Link href="Animal">Animal</Nav.Link>
             <Nav.Link href="Explore">Explore</Nav.Link>
             <Nav.Link href="Profile">Profile</Nav.Link>
-            <Nav.Link href="Login">Login</Nav.Link>
-            <Button variant="secondary" onClick={
+            {/* <Nav.Link href="Login">Login</Nav.Link> */}
+            <Button variant='secondary' onClick={connect()} id="connectButton">카이카스 지갑연결</Button>
+            
+            {/* <Button variant="secondary" onClick={
               async ()=>{
                 if(typeof window.klaytn !== 'undefined') {
                   const accounts = await window.klaytn.enable()
                   const account = accounts[0] // We currently only ever provide a single account,but the array gives us some room to grow.
                 }
-            }}>카이카스 지갑연결</Button>
+              }}>카이카스 지갑연결</Button> */}
           </Nav>
           </Container>
         </Navbar>
