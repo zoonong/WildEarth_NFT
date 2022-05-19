@@ -32,12 +32,12 @@ function Profile() {
                 <div className='profileNo'>
                     #{profile_no}
                 </div>
-                {/* <div className='wallet'>
+                <div className='wallet'>
                     <h2>
                         WALLET ADDRESS
                     </h2>
                 </div>
-                <div className='walletAddress'>
+                {/* <div className='walletAddress'>
                     <p>
                         {account}
                     </p>
