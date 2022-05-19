@@ -7,7 +7,7 @@ import Mint from './Mint';
 
 var profile_name = 'DEFAULT_NAME'
 var profile_no = '0000'
-var wallet_address = '0x00000000'
+// var wallet_address = account
 
 let back_color = {background:"#E0FACC"}
 let img_src = ["\\img\\bear.png", "\\img\\owl.png"]
@@ -32,12 +32,17 @@ function Profile() {
                 <div className='profileNo'>
                     #{profile_no}
                 </div>
-                <div className='wallet'>
-                    WALLET
+                {/* <div className='wallet'>
+                    <h2>
+                        WALLET ADDRESS
+                    </h2>
                 </div>
                 <div className='walletAddress'>
-                    {wallet_address}
-                </div>
+                    <p>
+                        {account}
+                    </p>
+                    
+                </div> */}
                 <br></br>
                 <br></br>
                 <div className='MintLink'>
