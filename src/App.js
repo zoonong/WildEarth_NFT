@@ -50,8 +50,7 @@ function App() {
               async ()=>{
                 if(typeof window.klaytn !== 'undefined') {
                   const accounts = await window.klaytn.enable()
-                  const account = accounts[0] // We currently only ever provide a single account,
-                                               // but the array gives us some room to grow.
+                  const account = accounts[0] // We currently only ever provide a single account,but the array gives us some room to grow.
                 }
             }}>카이카스 지갑연결</Button>
           </Nav>
