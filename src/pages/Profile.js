@@ -1,7 +1,7 @@
 import React from 'react';
 import './/pagecss/Profile.css';
 import { useState } from 'react';
-import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container} from 'react-bootstrap';
+import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 
 var profile_name = 'DEFAULT_NAME'

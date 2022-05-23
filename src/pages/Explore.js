@@ -2,7 +2,7 @@ import { useState } from 'react';
 import React from 'react';
 
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
-import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
 import './/pagecss/Explore.css';
 import Buy from './Buy';
@@ -137,15 +137,15 @@ function Explore() {
     let [nft_price,change_price] = useState("10000");
     let [nft_no,change_no] = useState("0000");
 
-// function numberSort(){
+    function numberSort(){
         
-// }
-// function lowerPriceSort(){
+    }
+    function lowerPriceSort(){
         
-// }
-// function HigherPriceSort(){
+    }
+    function HigherPriceSort(){
         
-// }
+    }
 
     return (
         <>
