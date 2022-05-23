@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-        <Navbar className="navBar" variant="light" fixed='top' style={nav_st}>
+        <Navbar className="navBarTop" variant="light" fixed='top' style={nav_st}>
           <Container>
           <Navbar.Brand href="/" className="navLogo">
             <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>

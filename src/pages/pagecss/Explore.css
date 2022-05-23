@@ -1,3 +1,6 @@
+.exploreBack {
+    height:100%;
+}
 .rankingBack {
     margin-top: 5%;
     border: 2px solid #E0FACC;
@@ -38,25 +41,28 @@
 }
 
 .marketBack {
-    display: flex;
+    height: 100%;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .marketTxt {
     width: 100%;
+    height: 6%;
     margin-left: 12%;
     margin-top:4%;
     font-size: 70px;
 }
+.sortBack {
+    display: flex;
+    justify-content: end;
+    margin-right: 15%;
+}
 .marketList {
-    width: 100%;
-    height: 1000px;
+    margin-top: 3%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    padding-top: 3%;
 }
 
 .marketCardBody {
