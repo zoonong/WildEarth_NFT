@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './/pagecss/Buy.css';
 import { useState } from 'react';
-import { Carousel, Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
+
 
 export default function Buy() {
     let back_color = {background:"#43BCC6"}
     let [img_src,change_img] = useState("\\img\\bear.png");
     let [img_name,change_name] = useState("반달가슴곰");
-    let [img_info,change_info] = useState(['ASIATIC BLACK BEAR', '-','-','2022/05/15','1','Normal']); //학명,예상 수명, 몸무게, 길이, 개체수
+    let [img_info,change_info] = useState(['ASIATIC BLACK BEAR', '-','-','2022/05/15','1','Normal']);
     let [img_Link,change_link] = useState("https://animalia.bio/asiatic-black-bear");
     let info5_st = {color:"black", fontWeight: 'bold'};
 

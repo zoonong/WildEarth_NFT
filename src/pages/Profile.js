@@ -1,27 +1,84 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './/pagecss/Profile.css';
 import { useState } from 'react';
-import { Dropdown, DropdownButton, Card, Button } from 'react-bootstrap';
+import { Card, Button, Form } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
-import Mint from './Mint';
 
 var profile_name = 'DEFAULT_NAME'
 var profile_no = '0000'
 // var wallet_address = account
 
 let back_color = {background:"#E0FACC"}
-let img_src = ["\\img\\bear.png", "\\img\\owl.png"]
+
+function NFT_sell() {
+    return(
+        <div>
+            <Form.Group className="mb-3">
+                <Form.Control placeholder="COST(KLAY)" />
+            </Form.Group>
+            <Button  variant="light" style={back_color}>
+                Sell
+            </Button>
+        </div>
+    );
+};
+
+function ShowNFT({NFT_name,NFT_url,NFT_number}){ 
+    let [show,setshow] = useState(false);
+
+    return(
+        <div className='profileImg'>
+            <Card className='profileCard'>
+                <Card.Img variant="bottom" src={NFT_url}  onClick={()=>{setshow(!show);}} />
+                <Card.Body className='profileCardBody' onClick={()=>{setshow(!show);}}>
+                    <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
+                        #{NFT_number} : {NFT_name}
+                        <br/>
+                    </Card.Text>
+                </Card.Body>
+                <Card.Footer  style={{background:"#f8fdf8"}}>
+                    {show && <NFT_sell/>}
+                </Card.Footer>
+            </Card>
+        </div>
+    );
+
+};
+const Collected_NFT = [
+    {
+        NAME: "반달가슴곰",
+        URL_: "\\img\\bear.png",
+        Num_: "1" 
+    },
+    {
+        NAME: "수리부엉이",
+        URL_: "\\img\\owl.png",
+        Num_: "2" 
+    },
+    {
+        NAME: "하프물범",
+        URL_: "\\img\\seal.png",
+        Num_: "3" 
+    },
+    {
+        NAME: "반달가슴곰",
+        URL_: "\\img\\bear.png",
+        Num_: "4" 
+    },
+    {
+        NAME: "수리부엉이",
+        URL_: "\\img\\owl.png",
+        Num_: "5" 
+    },
+    {
+        NAME: "하프물범",
+        URL_: "\\img\\seal.png",
+        Num_: "6" 
+    }   
+];
+
 
 function Profile() {
-    let [img_src,change_img] = useState("\\img\\bear.png");
-    let [img_name,change_name] = useState("반달가슴곰");
-    let [nft_price,change_price] = useState("10000");
-    let [nft_no,change_no] = useState("0000");
-
-    function Move_to_mint(e) {
-        window.location.replace("/Mint")
-    }
-
     return (
         <>
         <div className='profileBack'>
@@ -45,156 +102,28 @@ function Profile() {
                 </div> */}
                 <br></br>
                 <br></br>
-                <div className='MintLink'>
-                    <Link to={Mint}>
-                        <Button  variant="light" style={back_color} onClick= {Move_to_mint}>
-                            Mint New NFT
-                        </Button>
-                    </Link>
+                <div className='Mint_div'>
+                    <Form.Group className="mb-3">
+                        <Form.Label>JSON address</Form.Label>
+                        <Form.Control placeholder="JSON_URL" />
+                        <Form.Text className="text-muted">
+                            Minting할 NFT JSON URL 입력
+                        </Form.Text>
+                    </Form.Group>
+                    <Button  variant="light" style={back_color}>
+                        Mint New NFT
+                    </Button>
                 </div>
             </div>
+
             <div className='profileRight'>
                 <div className='tapLine' style={{fontWeight:"bold",fontSize:"50px",textAlign:"left"}}>
                     COLLECTED
                 </div>
                 <div className='profileList'>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-                <div className='profileImg'>
-                    <Card className='profileCard'>
-                        <Card.Img variant="bottom" src={img_src} />
-                            <Card.Body className='profileCardBody'>
-                                <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                                    {img_name}
-                                    <br/>
-                                    #{nft_no}
-                                </Card.Text>
-                                <Card.Text style={{fontWeight:"",fontSize:"17px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
-                                    PRICE 
-                                    <br/>
-                                    &#8361;{nft_price}
-                                </Card.Text>
-                            </Card.Body>
-                    </Card>
-                </div>
-
+                    {Collected_NFT.map(NFT=>(
+                        <ShowNFT NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.Num_}/>
+                    ))}
                 </div>
             </div>
         </div>

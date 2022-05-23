@@ -1,17 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import React from 'react';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useParams,useNavigate} from 'react-router-dom';
 import { Navbar,Container, Nav, Alert, Button } from 'react-bootstrap';
 import Animal from './pages/Animal';
 import Homepage from './pages/Homepage';
 import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
-import Buy from './pages/Buy';
-import Mint from './pages/Mint';
+import Buy from './pages/Buy.js';
 
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from './apikey';
 import Caver from 'caver-js';
@@ -45,6 +44,7 @@ async function connect() {
   // await check_status();
 }
 
+
 function App() {
   let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
   return (
@@ -60,6 +60,7 @@ function App() {
             <Nav.Link href="Animal">Animal</Nav.Link>
             <Nav.Link href="Explore">Explore</Nav.Link>
             <Nav.Link href="Profile" id='profileLink' ></Nav.Link>
+            <Nav.Link href="Login">Login</Nav.Link>
             <Button variant='secondary' onClick={connect()} id="connectButton">카이카스 지갑연결</Button>
             {/* <Button variant="secondary" onClick={
               async ()=>{
@@ -76,10 +77,12 @@ function App() {
             <Route path='/' element={<Homepage/>}/>
             <Route path='Animal' element={<Animal/>}/>
             <Route path='Explore' element={<Explore/>}/>
+            <Route path='Buy' element={<Buy/>}/>
+            {/* <Route path='/Buy/:id'>
+              <Buy item = {item}/>
+            </Route> */}
             <Route path='Profile' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
-            <Route path='Buy' element={<Buy/>}/>
-            <Route path='Mint' element={<Mint/>}/>
           </Routes>
         </BrowserRouter>
        
