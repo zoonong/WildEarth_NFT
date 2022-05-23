@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
-import { Carousel,Navbar,Container, Nav, NavDropdown, Card } from 'react-bootstrap';
+import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import './/pagecss/Explore.css';
 import Buy from './Buy';
@@ -17,6 +17,15 @@ function Explore() {
         window.location.replace("/Buy")
     }
 
+    function numberSort(){
+        
+    }
+    function lowerPriceSort(){
+        
+    }
+    function HigherPriceSort(){
+        
+    }
 
     return (
         <>
@@ -85,6 +94,13 @@ function Explore() {
             <div className='marketBack'>
                 <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}}>
                     MARKET
+                </div>
+                <div className="sortBack">
+                    <DropdownButton id="marketSort" variant='light' size='larger' title="Sort By" textAlign="right">
+                        <Dropdown.Item as="button" onClick={numberSort}>번호순</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={lowerPriceSort}>낮은가격순</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={HigherPriceSort}>높은가격순</Dropdown.Item>
+                    </DropdownButton> 
                 </div>
                 <div className='marketList'>
                 <div className='marketImg'>
@@ -264,9 +280,8 @@ function Explore() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>          
         </div>
-        
         </>
     );
 }
