@@ -47,3 +47,50 @@
     margin-bottom: 20px;
     border: 2px solid #E0FACC;
 }
+
+.btmBar {
+  background-color: #777777;
+  
+}
+.btmNav {
+  background-color: #777777;
+
+}
+
+.btmTab{
+  font-size: 24px;
+  width: 60%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.btmBarMid{
+  padding-left: 10%;
+  padding-right: 10%;
+  height: 5px;
+}
+.btmBarMidLine{
+  width: 100%;
+  height: 2px;
+  background-color: #393939;
+}
+
+.btmBarBtm{
+  display:flex;
+  justify-content: space-between;
+  padding: 1%;
+  padding-left: 16.4%;
+}
+
+.git{
+  padding-right: 18.4%;
+  
+}
+
+.gitAdd{
+  margin-left: 5%;
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+}
