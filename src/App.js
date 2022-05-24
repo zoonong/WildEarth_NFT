@@ -49,7 +49,7 @@ function App() {
   let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
   return (
     <div className="App">
-        <BrowserRouter>
+      <BrowserRouter>
         <Navbar className="navBarTop" variant="light" fixed='top' style={nav_st}>
           <Container>
           <Navbar.Brand href="/" className="navLogo">
@@ -57,10 +57,10 @@ function App() {
           </Navbar.Brand>
           <Nav className = "me-auto">
             <Nav.Link variant='secondary' disabled id="myWallet"></Nav.Link>
-            <Nav.Link href="Animal">Animal</Nav.Link>
-            <Nav.Link href="Explore">Explore</Nav.Link>
-            <Nav.Link href="Profile" id='profileLink' ></Nav.Link>
-            <Nav.Link href="Login">Login</Nav.Link>
+            <Nav.Link href="/Animal">Animal</Nav.Link>
+            <Nav.Link href="/Explore">Explore</Nav.Link>
+            <Nav.Link href="/Profile" id='profileLink' ></Nav.Link>
+            <Nav.Link href="/Login">Login</Nav.Link>
             <Button variant='secondary' onClick={connect()} id="connectButton">카이카스 지갑연결</Button>
             {/* <Button variant="secondary" onClick={
               async ()=>{
@@ -77,14 +77,14 @@ function App() {
             <Route path='/' element={<Homepage/>}/>
             <Route path='Animal' element={<Animal/>}/>
             <Route path='Explore' element={<Explore/>}/>
-            <Route path='Buy' element={<Buy/>}/>
+            <Route path='Buy/:NFTid' element={<Buy/>}/>
             {/* <Route path='/Buy/:id'>
               <Buy item = {item}/>
             </Route> */}
             <Route path='Profile' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
           </Routes>
-        </BrowserRouter>
+      </BrowserRouter>
        
     </div>
   );

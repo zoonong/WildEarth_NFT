@@ -5,7 +5,6 @@ import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropd
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
 import './/pagecss/Explore.css';
-import Buy from './Buy';
 
 const MarketNFT = [
     {
@@ -81,16 +80,10 @@ const RankItem = [
 
 
 function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){ 
-    const navigate = useNavigate();
-
-    const MovetoBuy = () => {
-        navigate("/Buy");
-    }
     
     return(
         <div className='marketImg'>
-            {/* <Link to={'/Buy/${MarketNFT.}'} */}
-            <Card className='marketCard' onClick={MovetoBuy}>
+            <Card className='marketCard'>
                 <Card.Img variant="bottom" src={NFT_url} />
                 <Card.Body className='marketCardBody'>
                     <Card.Text style={{fontWeight:"bold",fontSize:"30px",textAlign:"left"}}>
@@ -104,23 +97,17 @@ function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){
                         {NFT_price} KLAY
                     </Card.Text>
                 </Card.Body>
-            </Card>
+            </Card>    
         </div>
     );
 };
 
 function Ranking({NFT_name,NFT_url}){
 
-    const navigate = useNavigate();
-
-    const MovetoBuy = () => {
-        navigate("/Buy");
-    }
-
     return(
         <div className='rankingImg'>
             <Card className='rankingCard'>
-                <Card.Img variant="bottom" src={NFT_url} onClick={MovetoBuy}/>
+                <Card.Img variant="bottom" src={NFT_url}/>
                 <Card.Body className='marketCardBody'>
                     <Card.Text style={{fontWeight:"bold"}}>
                         {NFT_name}          
@@ -132,10 +119,6 @@ function Ranking({NFT_name,NFT_url}){
 };
 
 function Explore() {
-    let [img_src,change_img] = useState("\\img\\bear.png");
-    let [img_name,change_name] = useState("반달가슴곰");
-    let [nft_price,change_price] = useState("10000");
-    let [nft_no,change_no] = useState("0000");
 
     function numberSort(){
         
@@ -157,7 +140,9 @@ function Explore() {
 
                 <div className='rankingList'>
                     {RankItem.map(item=>(
+                    <Link to={`/Buy/${item.Num_}`} style={{textDecoration: 'none', color:'black'}} state={{Nname : item.NAME, Src : item.URL_, Cost : item.Price, Nid : item.Num_}}>
                         <Ranking NFT_name={item.NAME} NFT_url={item.URL_}/>
+                    </Link>
                     ))}
                 </div>
             </div>
@@ -174,8 +159,9 @@ function Explore() {
                 </div>
                 <div className='marketList'>
                     {MarketNFT.map(NFT=>(
+                    <Link to={`/Buy/${NFT.Num_}`} style={{textDecoration: 'none', color:'black'}} state={{Nname : NFT.NAME, Src : NFT.URL_, Cost : NFT.Price, Nid : NFT.Num_}}>
                         <NFTList NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.Num_} NFT_price={NFT.Price}/>
-                    ))}
+                    </Link>))}
                 </div>
             </div>
             <div className='btmBar' fixed='bottom'>
