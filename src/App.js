@@ -11,6 +11,7 @@ import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Buy from './pages/Buy.js';
+import ScrollToTop from './ScrollTop';
 
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from './apikey';
 import Caver from 'caver-js';
@@ -44,7 +45,6 @@ async function connect() {
   // await check_status();
 }
 
-
 function App() {
   let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
   return (
@@ -77,13 +77,16 @@ function App() {
             <Route path='/' element={<Homepage/>}/>
             <Route path='Animal' element={<Animal/>}/>
             <Route path='Explore' element={<Explore/>}/>
-            <Route path='Buy/:NFTid' element={<Buy/>}/>
-            {/* <Route path='/Buy/:id'>
-              <Buy item = {item}/>
-            </Route> */}
+            <Route path='Buy/:NFTid' element={<Buy/>} />
             <Route path='Profile' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
           </Routes>
+        
+        <ScrollToTop>
+          <Routes>
+              <Route path='Buy/:NFTid' element={<Buy/>} />
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
        
     </div>
