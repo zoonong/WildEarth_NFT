@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './/pagecss/Animal.css';
 import { useState } from 'react';
 import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container} from 'react-bootstrap';
