@@ -1,14 +1,36 @@
 import React from 'react';
 import './/pagecss/Profile.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
+import axios from 'axios';
+import {CONTRACTADDRESS, ABI} from '../config';
+import Caver from 'caver-js';
+import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 
 var profile_name = 'DEFAULT_NAME'
 var profile_no = '0000'
 // var wallet_address = account
 
 let back_color = {background:"#E0FACC"}
+let account;
+
+// Solidity
+const CHAIN_ID = '1001'; //테스트넷
+
+const option = {
+    headers: [
+      {
+        name: "Authorization",
+        value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+      },
+      {name: "x-chain-id", value:CHAIN_ID}
+    ]
+  }
+
+const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+
+
 
 function NFT_sell() {
     return(
@@ -44,41 +66,115 @@ function ShowNFT({NFT_name,NFT_url,NFT_number}){
     );
 
 };
-const Collected_NFT = [
-    {
-        NAME: "반달가슴곰",
-        URL_: "\\img\\bear.png",
-        Num_: "1" 
-    },
-    {
-        NAME: "수리부엉이",
-        URL_: "\\img\\owl.png",
-        Num_: "2" 
-    },
-    {
-        NAME: "하프물범",
-        URL_: "\\img\\seal.png",
-        Num_: "3" 
-    },
-    {
-        NAME: "반달가슴곰",
-        URL_: "\\img\\bear.png",
-        Num_: "4" 
-    },
-    {
-        NAME: "수리부엉이",
-        URL_: "\\img\\owl.png",
-        Num_: "5" 
-    },
-    {
-        NAME: "하프물범",
-        URL_: "\\img\\seal.png",
-        Num_: "6" 
-    }   
-];
+// const Collected_NFT = [
+//     {
+//         NAME: "반달가슴곰",
+//         URL_: "\\img\\bear.png",
+//         Num_: "1" 
+//     },
+//     {
+//         NAME: "수리부엉이",
+//         URL_: "\\img\\owl.png",
+//         Num_: "2" 
+//     },
+//     {
+//         NAME: "하프물범",
+//         URL_: "\\img\\seal.png",
+//         Num_: "3" 
+//     },
+//     {
+//         NAME: "반달가슴곰",
+//         URL_: "\\img\\bear.png",
+//         Num_: "4" 
+//     },
+//     {
+//         NAME: "수리부엉이",
+//         URL_: "\\img\\owl.png",
+//         Num_: "5" 
+//     },
+//     {
+//         NAME: "하프물범",
+//         URL_: "\\img\\seal.png",
+//         Num_: "6" 
+//     }   
+// ];
+
 
 
 function Profile() {
+
+    let [myToken,setToken] = useState([]);
+    let [myTokenURI,setTokenURI] = useState([]);
+
+    async function check_wallet(){    
+        const accounts = await window.klaytn.enable();
+        account = accounts[0];
+        const myContract = new caver.contract(ABI, CONTRACTADDRESS);
+
+        // 소유권 확인
+        let index = 0;
+        let last = 0;
+        let token_temp = [];
+        let tokenURI_temp = [];
+
+        await myContract.methods.balanceOf(account).call() // 본인 소유 NFT 개수 확인
+            .then(function(result){
+                last = result;
+            });
+
+        while(index<last){
+            await myContract.methods.tokenOfOwnerByIndex(account,index).call() // 본인 소유 NFT 확인
+            .then(function(result) {
+                token_temp.push(result);
+                index +=1;
+            }) 
+            .catch(function (error) {
+                console.log(error); 
+            });
+        }
+
+
+        for (var i of token_temp){
+            await myContract.methods.tokenURI(i).call()
+            .then(function(result){
+                tokenURI_temp.push(result);
+            });
+
+            
+        }
+        setToken(token_temp);
+        setTokenURI(tokenURI_temp);
+        
+    }
+
+    check_wallet();
+    // console.log(myToken);
+    // console.log(myTokenURI);
+
+
+    var [data, setData] = useState(["team3"]);
+    const url = "https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/f8dc0fb7-4d95-1884-5350-e783905517d2.json";
+
+    useEffect(()=>{
+      axios.get(url).then(function(response) {
+        setData(response.data);
+    });
+    },[]);
+
+    var arr = Object.values(data)
+
+    const Collected_NFT = [{
+        NAME: arr[0][1].value,
+        URL_: data.image,
+        NUM_: data.edition
+        // Hat : arr[0][2].value,
+        // Necklace : arr[0][3].value,
+        // BG : arr[0][0]
+        
+    }]
+
+
+
     return (
         <>
         <div className='profileBack'>
@@ -122,7 +218,7 @@ function Profile() {
                 </div>
                 <div className='profileList'>
                     {Collected_NFT.map(NFT=>(
-                        <ShowNFT NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.Num_}/>
+                        <ShowNFT NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.NUM_}/>
                     ))}
                 </div>
             </div>
