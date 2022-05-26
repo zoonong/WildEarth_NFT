@@ -15,6 +15,7 @@ var profile_no = '0000'
 let back_color = {background:"#E0FACC"}
 let account;
 
+
 // Solidity
 const CHAIN_ID = '1001'; //테스트넷
 
@@ -173,6 +174,21 @@ function Profile() {
         
     }]
 
+    //mint function
+    async function _mint(){
+        const caver = new Caver(window.klaytn);
+        let accounts = await window.klaytn.enable();
+        const account = accounts[0]
+        const myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+        console.log(myContract)
+
+        myContract.options.address=CONTRACTADDRESS
+        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 0xf4240})
+        const totalSupply = await myContract.methods.totalSupply().call();
+        console.log(totalSupply)
+        alert("민팅이 완료 되었습니다.")
+    }
+
 
 
     return (
@@ -200,13 +216,19 @@ function Profile() {
                 <br></br>
                 <div className='Mint_div'>
                     <Form.Group className="mb-3">
+                        <Form.Label>Wallet address</Form.Label>
+                        <Form.Control placeholder="Wallet address" />
+                        <Form.Text className="text-muted">
+                            Wallet address 입력
+                        </Form.Text>
+                        <br/>
                         <Form.Label>JSON address</Form.Label>
                         <Form.Control placeholder="JSON_URL" />
                         <Form.Text className="text-muted">
                             Minting할 NFT JSON URL 입력
                         </Form.Text>
                     </Form.Group>
-                    <Button  variant="light" style={back_color}>
+                    <Button  variant="light" style={back_color} onClick={_mint}>
                         Mint New NFT
                     </Button>
                 </div>
@@ -246,7 +268,7 @@ function Profile() {
                             <img src = "\img\dongguk_logo.png" width = '234' height= '76'  textAlign = 'center'></img>
                         </a>
                     </div>
-                    <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
+                        <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
                         gitHub <br/>
                         <div className='gitAdd' >
                             <div className='gitAddLeft' style={{marginRight:"7%"}}>
