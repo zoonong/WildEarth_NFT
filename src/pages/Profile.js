@@ -14,7 +14,7 @@ var profile_no = '0000'
 
 let back_color = {background:"#E0FACC"}
 let account;
-let myContract;
+
 
 // Solidity
 const CHAIN_ID = '1001'; //테스트넷
@@ -107,12 +107,6 @@ function Profile() {
     let [myToken,setToken] = useState([]);
     let [myTokenURI,setTokenURI] = useState([]);
 
-    async function _check(){
-        const accounts = await window.klaytn.enable();
-        account = accounts[0];
-        myContract = new caver.contract(ABI, CONTRACTADDRESS);
-    }
-
     async function check_wallet(){    
         const accounts = await window.klaytn.enable();
         account = accounts[0];
@@ -182,16 +176,16 @@ function Profile() {
 
     //mint function
     async function _mint(){
-        await _check();
-
+        const caver = new Caver(window.klaytn);
+        let accounts = await window.klaytn.enable();
+        const account = accounts[0]
+        const myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
         console.log(myContract)
 
-        myContract.methods.airDropMint(
-            account,'123'
-        ).send({from: account, gas: 3000000, value: 0},
-            function(error, transactionHash) {
-            console.log(error,transactionHash)
-            });
+        myContract.options.address=CONTRACTADDRESS
+        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 0xf4240})
+        const totalSupply = await myContract.methods.totalSupply().call();
+        console.log(totalSupply)
         alert("민팅이 완료 되었습니다.")
     }
 
