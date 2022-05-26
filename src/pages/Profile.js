@@ -172,6 +172,10 @@ function Profile() {
         // BG : arr[0][0]
         
     }]
+    //mint function
+    async function _mint(){
+        alert("민팅이 완료 되었습니다.")
+    }
 
 
 
@@ -200,13 +204,19 @@ function Profile() {
                 <br></br>
                 <div className='Mint_div'>
                     <Form.Group className="mb-3">
+                        <Form.Label>Wallet address</Form.Label>
+                        <Form.Control placeholder="Wallet address" />
+                        <Form.Text className="text-muted">
+                            Wallet address 입력
+                        </Form.Text>
+                        <br/>
                         <Form.Label>JSON address</Form.Label>
                         <Form.Control placeholder="JSON_URL" />
                         <Form.Text className="text-muted">
                             Minting할 NFT JSON URL 입력
                         </Form.Text>
                     </Form.Group>
-                    <Button  variant="light" style={back_color}>
+                    <Button  variant="light" style={back_color} onClick={_mint}>
                         Mint New NFT
                     </Button>
                 </div>
