@@ -149,8 +149,8 @@ function Profile() {
     }
 
     check_wallet();
-    // console.log(myToken);
-    // console.log(myTokenURI);
+    console.log(myToken);
+    console.log(myTokenURI);
 
 
     var [data, setData] = useState(["team3"]);
