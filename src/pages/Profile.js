@@ -196,6 +196,9 @@ function Profile() {
         <div className='profileBack'>
             <div className='profileLeft'>
                 <div className='proflieName'>
+                    마이페이지
+                </div>
+                {/* <div className='proflieName'>
                     {profile_name}
                 </div>
                 <div className='profileNo'>
@@ -205,7 +208,7 @@ function Profile() {
                     <h2>
                         WALLET ADDRESS
                     </h2>
-                </div>
+                </div> */}
                 {/* <div className='walletAddress'>
                     <p>
                         {account}
@@ -219,7 +222,7 @@ function Profile() {
                         <Form.Label>Wallet address</Form.Label>
                         <Form.Control placeholder="Wallet address" />
                         <Form.Text className="text-muted">
-                            Wallet address 입력 => 로그인 한 주소로 변경 예정
+                            Wallet address 입력
                         </Form.Text>
                         <br/>
                         <Form.Label>JSON address</Form.Label>
