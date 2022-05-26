@@ -219,7 +219,7 @@ function Profile() {
                         <Form.Label>Wallet address</Form.Label>
                         <Form.Control placeholder="Wallet address" />
                         <Form.Text className="text-muted">
-                            Wallet address 입력
+                            Wallet address 입력 => 로그인 한 주소로 변경 예정
                         </Form.Text>
                         <br/>
                         <Form.Label>JSON address</Form.Label>
