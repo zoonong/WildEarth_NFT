@@ -179,10 +179,19 @@ function Profile() {
         // BG : arr[0][0]
         
     }]
+
     //mint function
     async function _mint(){
         await _check();
+
         console.log(myContract)
+
+        myContract.methods.airDropMint(
+            account,'123'
+        ).send({from: account, gas: 3000000, value: 0},
+            function(error, transactionHash) {
+            console.log(error,transactionHash)
+            });
         alert("민팅이 완료 되었습니다.")
     }
 
@@ -265,7 +274,7 @@ function Profile() {
                             <img src = "\img\dongguk_logo.png" width = '234' height= '76'  textAlign = 'center'></img>
                         </a>
                     </div>
-                    <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
+                        <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
                         gitHub <br/>
                         <div className='gitAdd' >
                             <div className='gitAddLeft' style={{marginRight:"7%"}}>
