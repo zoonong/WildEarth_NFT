@@ -14,6 +14,7 @@ var profile_no = '0000'
 
 let back_color = {background:"#E0FACC"}
 let account;
+let myContract;
 
 // Solidity
 const CHAIN_ID = '1001'; //테스트넷
@@ -106,6 +107,12 @@ function Profile() {
     let [myToken,setToken] = useState([]);
     let [myTokenURI,setTokenURI] = useState([]);
 
+    async function _check(){
+        const accounts = await window.klaytn.enable();
+        account = accounts[0];
+        myContract = new caver.contract(ABI, CONTRACTADDRESS);
+    }
+
     async function check_wallet(){    
         const accounts = await window.klaytn.enable();
         account = accounts[0];
@@ -174,6 +181,8 @@ function Profile() {
     }]
     //mint function
     async function _mint(){
+        await _check();
+        console.log(myContract)
         alert("민팅이 완료 되었습니다.")
     }
 
