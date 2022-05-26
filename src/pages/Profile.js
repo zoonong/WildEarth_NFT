@@ -29,7 +29,7 @@ const option = {
     ]
   }
 
-const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 
 
 
@@ -106,11 +106,14 @@ function Profile() {
 
     let [myToken,setToken] = useState([]);
     let [myTokenURI,setTokenURI] = useState([]);
+    let myContract;
 
+    let accounts;
     async function check_wallet(){    
-        const accounts = await window.klaytn.enable();
+        caver = new Caver(window.klaytn);
+        accounts = await window.klaytn.enable();
         account = accounts[0];
-        const myContract = new caver.contract(ABI, CONTRACTADDRESS);
+        myContract = new caver.contract(ABI, CONTRACTADDRESS);
 
         // 소유권 확인
         let index = 0;
@@ -149,8 +152,9 @@ function Profile() {
     }
 
     check_wallet();
-    console.log(myToken);
-    console.log(myTokenURI);
+    
+    // console.log(myToken);
+    // console.log(myTokenURI);
 
 
     var [data, setData] = useState(["team3"]);
@@ -176,10 +180,10 @@ function Profile() {
 
     //mint function
     async function _mint(){
-        const caver = new Caver(window.klaytn);
-        let accounts = await window.klaytn.enable();
-        const account = accounts[0]
-        const myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+        accounts = await window.klaytn.enable();
+        account = accounts[0]
+        myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
         console.log(myContract)
 
         myContract.options.address=CONTRACTADDRESS
