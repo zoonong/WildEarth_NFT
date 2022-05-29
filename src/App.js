@@ -37,7 +37,7 @@ async function connect() {
   account = accounts[0];
   caver.klay.getBalance(account)
       .then(function (balance) {
-          document.getElementById("connectButton").style.visibility = "hidden";
+          document.getElementById("connectButton").style.visibility = "collapse";
           document.getElementById("profileLink").innerHTML = 'Profile';
           document.getElementById("myWallet").innerHTML = `${account}`;
           // document.getElementById("myKlay").innerHTML = `잔액: ${caver.utils.fromPeb(balance, "KLAY")} KLAY`
@@ -59,7 +59,6 @@ function App() {
             <Nav.Link variant='secondary' disabled id="myWallet"></Nav.Link>
             <Nav.Link href="/Animal">Animal</Nav.Link>
             <Nav.Link href="/Explore">Explore</Nav.Link>
-            <Nav.Link href="/Profile" id='profileLink' ></Nav.Link>
             <Nav.Link href="/Login">Login</Nav.Link>
             <Button variant='secondary' onClick={connect} id="connectButton">카이카스 지갑연결</Button>
             {/* <Button variant="secondary" onClick={
