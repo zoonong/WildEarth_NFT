@@ -104,13 +104,30 @@ function ShowNFT({NFT_name,NFT_url,NFT_number}){
 
 function Profile() {
 
-    let [myToken,setToken] = useState([]);
-    let [myTokenURI,setTokenURI] = useState([]);
+    // let [myToken,setToken] = useState([]);
+    // let [myTokenURI,setTokenURI] = useState([]);
+    let [TokenObject,setToken_Object] = useState([]);
     let myContract;
 
     let accounts;
+
+    //mint function
+    async function _mint(){
+
+        accounts = await window.klaytn.enable();
+        account = accounts[0]
+        myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+        console.log(myContract)
+
+        myContract.options.address=CONTRACTADDRESS
+        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 0xf4240})
+        const totalSupply = await myContract.methods.totalSupply().call();
+        console.log(totalSupply)
+        alert("민팅이 완료 되었습니다.")
+    }
+    
     async function check_wallet(){    
-        caver = new Caver(window.klaytn);
+
         accounts = await window.klaytn.enable();
         account = accounts[0];
         myContract = new caver.contract(ABI, CONTRACTADDRESS);
@@ -119,7 +136,7 @@ function Profile() {
         let index = 0;
         let last = 0;
         let token_temp = [];
-        let tokenURI_temp = [];
+        let token_object = [];
 
         await myContract.methods.balanceOf(account).call() // 본인 소유 NFT 개수 확인
             .then(function(result){
@@ -141,13 +158,17 @@ function Profile() {
         for (var i of token_temp){
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
-                tokenURI_temp.push(result);
+                var token_one = new Object();
+                token_one['T_ID'] = i;
+                token_one['T_URI'] = result;
+                token_object.push(token_one);
             });
 
             
         }
-        setToken(token_temp);
-        setTokenURI(tokenURI_temp);
+        setToken_Object(token_object);
+        // setToken(token_temp);
+        // setTokenURI(tokenURI_temp);
         
     }
 
@@ -155,6 +176,7 @@ function Profile() {
     
     // console.log(myToken);
     // console.log(myTokenURI);
+    console.log(TokenObject)
 
 
     var [data, setData] = useState(["team3"]);
@@ -178,20 +200,6 @@ function Profile() {
         
     }]
 
-    //mint function
-    async function _mint(){
-
-        accounts = await window.klaytn.enable();
-        account = accounts[0]
-        myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
-        console.log(myContract)
-
-        myContract.options.address=CONTRACTADDRESS
-        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 0xf4240})
-        const totalSupply = await myContract.methods.totalSupply().call();
-        console.log(totalSupply)
-        alert("민팅이 완료 되었습니다.")
-    }
 
 
 
