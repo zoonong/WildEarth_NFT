@@ -35,14 +35,29 @@ let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytna
 
 function NFT_sell() {
     //sell
+    async function _sell(){
+        caver = new Caver(window.klaytn);
+        let accounts = await window.klaytn.enable();
+        account = accounts[0]
+        let myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
+        let animalTokenPrices = await myContract.methods.animalTokenPrices(1).call();
+        console.log(animalTokenPrices)
+
+        myContract.options.address=CONTRACTADDRESS
+        await myContract.methods.setForSaleAnimalToken(1,1).send({from: account, gas: 3000000})
+
+        animalTokenPrices = await myContract.methods.animalTokenPrices(1).call();
+        console.log(animalTokenPrices)
+        alert("판매가 완료 되었습니다.")
+    }
 
     return(
         <div>
             <Form.Group className="mb-3">
                 <Form.Control placeholder="COST(KLAY)" />
             </Form.Group>
-            <Button  variant="light" style={back_color}>
+            <Button  variant="light" style={back_color} onClick={_sell}>
                 Sell
             </Button>
         </div>
@@ -116,20 +131,20 @@ function Profile() {
 
     //mint function
     async function _mint(){
-
+        caver = new Caver(window.klaytn);
         accounts = await window.klaytn.enable();
         account = accounts[0]
         myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
         console.log(myContract)
 
         myContract.options.address=CONTRACTADDRESS
-        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 0xf4240})
+        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 3000000})
         const totalSupply = await myContract.methods.totalSupply().call();
         console.log(totalSupply)
         alert("민팅이 완료 되었습니다.")
     }
     
-    async function check_wallet(){    
+    async function check_wallet(){
 
         accounts = await window.klaytn.enable();
         account = accounts[0];
@@ -175,7 +190,7 @@ function Profile() {
         
     }
 
-    check_wallet();
+    //check_wallet();
     
     // console.log(myToken);
     // console.log(myTokenURI);
