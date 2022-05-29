@@ -34,6 +34,9 @@ let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytna
 
 
 function NFT_sell() {
+    //sell
+
+
     return(
         <div>
             <Form.Group className="mb-3">
