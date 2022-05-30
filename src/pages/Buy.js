@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../logo.svg';
 import './/pagecss/Buy.css';
 import { useState } from 'react';
 import { Card, Button , Nav, Navbar, Container} from 'react-bootstrap';
@@ -10,7 +11,7 @@ export default function Buy() {
     let NFTinfo = useLocation();
 
     return(
-        <div>
+        <div className='buyBack'>
             <br></br>
             <div className='Buy_frame_top'>
                 <div className='NFT_img_card'>
@@ -105,12 +106,14 @@ export default function Buy() {
                 <div className='btmBarTop'>
                     <Navbar bg="#aaaaaa" variant="dark">
                         <Container className='btmNav'>
+                        <Navbar.Brand href="/" className="navLogo">
+                            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
+                        </Navbar.Brand>
                         <Nav className="btmTab">
-                            <Nav.Link href="/" style={{marginRight:'20%'}}> <img src = "\img\logo_cap.png" width = '160' height= '72'  textAlign = 'center'></img> </Nav.Link>
                             <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
                             <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
                             <Nav.Link href="/Profile" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profile</Nav.Link>
-                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"%"}}>Connect</Nav.Link>
+                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
                         </Nav>
                         </Container>
                     </Navbar>

@@ -51,7 +51,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar className="navBarTop" variant="light" fixed='top' style={nav_st}>
-          <Container>
+          <Container className="navBarContainer">
           <Navbar.Brand href="/" className="navLogo">
             <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
           </Navbar.Brand>
@@ -60,7 +60,7 @@ function App() {
             <Nav.Link href="/Animal">Animal</Nav.Link>
             <Nav.Link href="/Explore">Explore</Nav.Link>
             <Nav.Link href="/Login">Login</Nav.Link>
-            <Button variant='secondary' onClick={connect} id="connectButton">카이카스 지갑연결</Button>
+            <Nav.Link variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
             {/* <Button variant="secondary" onClick={
               async ()=>{
                 if(typeof window.klaytn !== 'undefined') {
