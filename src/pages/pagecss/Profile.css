@@ -6,7 +6,7 @@
 .profileBack {
     width: 100%;
     display: flex;
-
+    font-family: 'Do Hyeon', sans-serif;
 }
 
 .profileLeft {
@@ -27,7 +27,6 @@
     height: 20px;
     font-size: 30px;
     font-weight: bold;
-    font-family: "ROKABold";
 }
 
 .profileNo{
@@ -36,7 +35,6 @@
     height: 20px;
     font-size: 30px;
     font-weight: bold;
-    font-family: "ROKABold";
 }
 
 .wallet{
@@ -70,8 +68,6 @@
     width: 100%;
     height: 3%;
     font-size: large;
-    font-family: "ROKABold";
-
 }
 
 .profileList{

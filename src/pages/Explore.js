@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
+import logo from '../logo.svg';
 
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
@@ -168,12 +169,14 @@ function Explore() {
                 <div className='btmBarTop'>
                     <Navbar bg="#aaaaaa" variant="dark">
                         <Container className='btmNav'>
+                        <Navbar.Brand href="/" className="navLogo">
+                            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
+                        </Navbar.Brand>
                         <Nav className="btmTab">
-                            <Nav.Link href="/" style={{marginRight:'20%'}}> <img src = "\img\logo_cap.png" width = '160' height= '72'  textAlign = 'center'></img> </Nav.Link>
                             <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
                             <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
                             <Nav.Link href="/Profile" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profile</Nav.Link>
-                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"%"}}>Connect</Nav.Link>
+                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
                         </Nav>
                         </Container>
                     </Navbar>
@@ -202,7 +205,7 @@ function Explore() {
                         </div>
                     </div>
                 </div>
-            </div>          
+            </div>
         </div>
         </>
     );

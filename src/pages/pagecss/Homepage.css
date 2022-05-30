@@ -24,9 +24,15 @@
 
   .homepageFrameMid {
     height: 100%;
-    font-size: 200%;
+    font-size: 300%;
     font-weight: bold;
     margin-bottom: 7%;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+
+  .homepageFindNFT{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 270%;
   }
 
   .homepageFrameBottom {
@@ -51,19 +57,31 @@
 
 .btmBar {
   background-color: #777777;
-  
+  font-family: 'Press Start 2P', cursive;
 }
+
+.btmBarTop{
+  height: 100%;
+  align-content: center;
+}
+
 .btmNav {
   background-color: #777777;
-
+  height: 100%;
 }
 
 .btmTab{
-  font-size: 24px;
+  font-size: 18px;
   width: 60%;
+  height: 72px;
   display: flex;
   align-content: center;
   align-items: center;
+  margin-right: 15%;
+}
+
+.btmBarLogo{
+  height: 10px;
 }
 
 .btmBarMid{
@@ -78,6 +96,7 @@
 }
 
 .btmBarBtm{
+  
   display:flex;
   justify-content: space-between;
   padding: 1%;
@@ -92,6 +111,6 @@
 .gitAdd{
   margin-left: 5%;
   display: flex;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
