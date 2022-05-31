@@ -59,7 +59,8 @@ function App() {
             <Nav.Link variant='secondary' disabled id="myWallet"></Nav.Link>
             <Nav.Link href="/Animal">Animal</Nav.Link>
             <Nav.Link href="/Explore">Explore</Nav.Link>
-            <Nav.Link href="/Login">Login</Nav.Link>
+            <Nav.Link href="/Profile" id='profileLink' ></Nav.Link>
+            {/* <Nav.Link href="/Login">Login</Nav.Link> */}
             <Nav.Link variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
             {/* <Button variant="secondary" onClick={
               async ()=>{

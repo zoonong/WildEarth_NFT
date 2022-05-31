@@ -1,4 +1,4 @@
-export const CONTRACTADDRESS = "0xf9e46D38Bc3E269823603A78AC0e2371181b2DBB";
+export const CONTRACTADDRESS = "0x003Bc229257CF366bB92aFE8d912A816291E32AD";
 
 export const ABI = [
 	{
@@ -162,7 +162,7 @@ export const ABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "cancelSaleToken",
+		"name": "cPurchaseAnimalToken",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
