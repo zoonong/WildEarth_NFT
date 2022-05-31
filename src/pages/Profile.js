@@ -131,7 +131,7 @@ function Profile() {
     let accounts;
 
     //mint function
-    async function _mint(){
+    async function _mint(walletAddress, jsonAddress){
         caver = new Caver(window.klaytn);
         accounts = await window.klaytn.enable();
         account = accounts[0]
@@ -139,9 +139,14 @@ function Profile() {
         console.log(myContract)
 
         myContract.options.address=CONTRACTADDRESS
-        await myContract.methods.airDropMint(account, '123').send({from: account, gas: 3000000})
+        await myContract.methods.airDropMint(walletAddress, jsonAddress).send({from: account, gas: 3000000})
+
         const totalSupply = await myContract.methods.totalSupply().call();
         console.log(totalSupply)
+
+        document.getElementById("walletAddress").value = null
+        document.getElementById("JSON_URL").value = null
+
         alert("민팅이 완료 되었습니다.")
     }
     
@@ -251,18 +256,20 @@ function Profile() {
                 <div className='Mint_div'>
                     <Form.Group className="mb-3">
                         <Form.Label>Wallet address</Form.Label>
-                        <Form.Control placeholder="Wallet address" />
+                        <Form.Control placeholder="Wallet address" id="walletAddress"/>
                         <Form.Text className="text-muted">
                             Wallet address 입력
                         </Form.Text>
                         <br/>
                         <Form.Label>JSON address</Form.Label>
-                        <Form.Control placeholder="JSON_URL" />
+                        <Form.Control placeholder="JSON_URL" id="JSON_URL"/>
                         <Form.Text className="text-muted">
                             Minting할 NFT JSON URL 입력
                         </Form.Text>
                     </Form.Group>
-                    <Button  variant="light" style={back_color} onClick={_mint}>
+                    <Button  variant="light" style={back_color} onClick={()=>{
+                        _mint(document.getElementById("walletAddress").value,document.getElementById("JSON_URL").value)
+                    }}>
                         Mint New NFT
                     </Button>
                 </div>
