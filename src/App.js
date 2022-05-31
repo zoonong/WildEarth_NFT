@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import './App.css';
 import { useState,useEffect } from 'react';
 import React from 'react';
 
@@ -15,6 +14,7 @@ import ScrollToTop from './ScrollTop';
 
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from './apikey';
 import Caver from 'caver-js';
+import './App.css';
 
 const CHAIN_ID = '1001'; //테스트넷
 
@@ -37,7 +37,7 @@ async function connect() {
   account = accounts[0];
   caver.klay.getBalance(account)
       .then(function (balance) {
-          document.getElementById("connectButton").style.visibility = "collapse";
+          document.getElementById("connectButton").innerHTML = "";
           document.getElementById("profileLink").innerHTML = 'Profile';
           document.getElementById("myWallet").innerHTML = `${account}`;
           // document.getElementById("myKlay").innerHTML = `잔액: ${caver.utils.fromPeb(balance, "KLAY")} KLAY`
@@ -57,11 +57,11 @@ function App() {
           </Navbar.Brand>
           <Nav className = "me-auto">
             <Nav.Link variant='secondary' disabled id="myWallet"></Nav.Link>
-            <Nav.Link href="/Animal">Animal</Nav.Link>
-            <Nav.Link href="/Explore">Explore</Nav.Link>
-            <Nav.Link href="/Profile" id='profileLink' ></Nav.Link>
+            <Nav.Link className="navLinkAnimal" href="/Animal">Animal</Nav.Link>
+            <Nav.Link className="navLinkExplore" href="/Explore">Explore</Nav.Link>
+            <Nav.Link className="navLinkProfile" href="/Profile" id='profileLink' ></Nav.Link>
             {/* <Nav.Link href="/Login">Login</Nav.Link> */}
-            <Nav.Link variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
+            <Nav.Link className='navLinkConnect' variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
             {/* <Button variant="secondary" onClick={
               async ()=>{
                 if(typeof window.klaytn !== 'undefined') {

@@ -41,10 +41,32 @@
   font-family: 'Press Start 2P', cursive;
 }
 
-  
+.navBarContainer{
+  max-width: 1580px !important;
+}
 
 .me-auto {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.navLinkAnimal{
+  padding-left: 2rem !important;
+  padding-right: 1.5rem !important;
+}
+
+.navLinkExplore{
+  padding-right: 2rem !important;
+}
+
+.navLinkProfile{
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+
+.navLinkConnect{
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+
 }
