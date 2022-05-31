@@ -34,21 +34,21 @@ let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytna
 
 
 
-function NFT_sell() {
+function NFT_sell(props) {
     //sell
-    async function _sell(){
+    async function _sell(NFT_number,cost){
+        cost = Number(cost)
         caver = new Caver(window.klaytn);
         let accounts = await window.klaytn.enable();
         account = accounts[0]
         let myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
-        let animalTokenPrices = await myContract.methods.animalTokenPrices(1).call();
+        let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
         console.log(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
-        await myContract.methods.setForSaleAnimalToken(1,1).send({from: account, gas: 3000000})
-
-        animalTokenPrices = await myContract.methods.animalTokenPrices(1).call();
+        await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
+        animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
         console.log(animalTokenPrices)
         alert("판매가 완료 되었습니다.")
     }
@@ -56,16 +56,18 @@ function NFT_sell() {
     return(
         <div>
             <Form.Group className="mb-3">
-                <Form.Control placeholder="COST(KLAY)" />
+                <Form.Control placeholder="COST(KLAY)" id="cost" type="number"/>
             </Form.Group>
-            <Button  variant="light" style={back_color} onClick={_sell}>
+            <Button  variant="light" style={back_color} onClick={() => {
+                _sell(props.NFT_number,document.getElementById("cost").value)
+            }}>
                 Sell
             </Button>
         </div>
     );
 };
 
-function ShowNFT({NFT_name,NFT_url,NFT_number}){ 
+function ShowNFT({NFT_name,NFT_url,NFT_number}){
     let [show,setshow] = useState(false);
 
     return(
@@ -79,7 +81,7 @@ function ShowNFT({NFT_name,NFT_url,NFT_number}){
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer  style={{background:"#f8fdf8"}}>
-                    {show && <NFT_sell/>}
+                    {show && <NFT_sell NFT_number={NFT_number}/>}
                 </Card.Footer>
             </Card>
         </div>
