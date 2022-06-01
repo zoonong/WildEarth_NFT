@@ -60,8 +60,8 @@ function App() {
             <Nav.Link className="navLinkAnimal" href="/Animal">Animal</Nav.Link>
             <Nav.Link className="navLinkExplore" href="/Explore">Explore</Nav.Link>
             <Nav.Link className="navLinkProfile" href="/Profile" id='profileLink' ></Nav.Link>
-            {/* <Nav.Link href="/Login">Login</Nav.Link> */}
-            <Nav.Link className='navLinkConnect' variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
+            <Nav.Link href="/Login">Login</Nav.Link>
+            <Nav.Link className='navLinkConnect' variant='secondary' onClick={connect()} id="connectButton">Connect</Nav.Link>
             {/* <Button variant="secondary" onClick={
               async ()=>{
                 if(typeof window.klaytn !== 'undefined') {
@@ -79,7 +79,7 @@ function App() {
             <Route path='Explore' element={<Explore/>}/>
             <Route path='Buy/:NFTid' element={<Buy/>} />
             <Route path='Profile' element={<Profile/>}/>
-            <Route path='Login' element={<Login/>}/>
+            <Route path='/Login' element={<Login/>}/>
           </Routes>
         
         <ScrollToTop>
