@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Profile.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -193,18 +193,12 @@ function Profile() {
     
     // console.log(myToken);
     // console.log(myTokenURI);
-    // console.log(TokenObject)
+    
 
-    const Information = [
-        {
-            T_ID : '7',
-            T_URI : "https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/fee0c422-6826-47c5-f3db-539df3c57e89.json"
-        },
-        {
-            T_ID :'8',
-            T_URI :'https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/47e24e0b-4ebe-6e24-5a95-cf89bc329ee7.json'
-        }
-    ];
+
+
+    const Information = TokenObject;
+    // console.log(Information);
 
     return (
         <>
