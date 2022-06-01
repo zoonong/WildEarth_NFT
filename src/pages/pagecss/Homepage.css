@@ -68,6 +68,7 @@
 .btmNav {
   background-color: #777777;
   height: 100%;
+  max-width: 1200px !important;
 }
 
 .btmTab{
