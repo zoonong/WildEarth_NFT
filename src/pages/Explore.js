@@ -195,6 +195,47 @@ function Explore() {
     let accounts;
     let account;
     let [TotalObject,setToken_Total] = useState([]);
+    let [SaleObject, setSale_Object] = useState([]);
+
+    async function check_onsale(){
+        accounts = await window.klaytn.enable();
+        account = accounts[0];
+
+
+        var last = 0;
+        var token_sale = [];
+        var index = 0;
+        myContract = new caver.contract(ABI, CONTRACTADDRESS);
+        var token_temp = [];
+
+        await myContract.methods.getOnSaleAnimalTokenArrayLength().call() // 전체 NFT 개수 확인
+            .then(function(result){
+                last = result;
+        });
+        while(index<last){
+            await myContract.methods.getOnSaleAnimalToken(index).call()
+            .then(function(result){
+                token_temp.push(result);
+                index += 1;
+            })
+            .catch(function (error){
+                console.log(error)
+            });
+        }
+        for (var i of token_temp){
+            await myContract.methods.tokenURI(i).call()
+            .then(function(result){
+                var token_one = new Object();
+                token_one['T_ID'] = i;
+                token_one['T_URI'] = result;
+                token_sale.push(token_one);
+            });
+        }
+        setSale_Object(token_sale);
+        console.log(SaleObject);
+
+
+    }
 
     async function check_total(){
 
@@ -203,16 +244,14 @@ function Explore() {
         myContract = new caver.contract(ABI, CONTRACTADDRESS);
 
         // 소유권 확인
-        let index = 0;
-        let last = 0;
-        let token_temp = [];
+
+        var last = 0;
         let token_object = [];
 
         await myContract.methods.totalSupply().call() // 전체 NFT 개수 확인
             .then(function(result){
                 last = result;
         });
-        console.log(last);
 
     
 
@@ -227,9 +266,10 @@ function Explore() {
             });
         }
         setToken_Total(token_object);
-        console.log(TotalObject);
+        // console.log(TotalObject);
     }
     check_total();
+    check_onsale();
 
     
 

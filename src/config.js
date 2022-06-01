@@ -1,4 +1,4 @@
-export const CONTRACTADDRESS = "0xD66B9669162DB6A493d80e7d07547BD7d6230f40";
+export const CONTRACTADDRESS = "0xd7FE277e33843B11B306143EE2C36210e6252A74";
 
 export const ABI = [
 	{
@@ -347,6 +347,27 @@ export const ABI = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getOnSaleAnimalToken",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
