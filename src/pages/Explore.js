@@ -5,6 +5,10 @@ import logo from '../logo.svg';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
+import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
+import Caver from 'caver-js';
+import {CONTRACTADDRESS, ABI} from '../config';
+import axios from 'axios';
 import './/pagecss/Explore.css';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 import Caver from 'caver-js';
@@ -68,6 +72,22 @@ const TotalNFT = async () => {
     console.log(nfts);
     return nfts;
 }
+
+const CHAIN_ID = '1001'; //테스트넷
+
+
+
+const option = {
+    headers: [
+      {
+        name: "Authorization",
+        value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+      },
+      {name: "x-chain-id", value:CHAIN_ID}
+    ]
+  }
+
+let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 
 const MarketNFT = [
     {
@@ -188,6 +208,49 @@ function Explore() {
         const _nfts = await TotalNFT();
         setNfts(_nfts);
     }
+
+    let myContract;
+
+    let accounts;
+    let account;
+    let [TotalObject,setToken_Total] = useState([]);
+
+    async function check_total(){
+
+        accounts = await window.klaytn.enable();
+        account = accounts[0];
+        myContract = new caver.contract(ABI, CONTRACTADDRESS);
+
+        // 소유권 확인
+        let index = 0;
+        let last = 0;
+        let token_temp = [];
+        let token_object = [];
+
+        await myContract.methods.totalSupply().call() // 전체 NFT 개수 확인
+            .then(function(result){
+                last = result;
+        });
+        console.log(last);
+
+    
+
+        for (var i =1; i<= last; i++){
+            await myContract.methods.tokenURI(i).call()
+            .then(function(result){
+                var token_one = new Object();
+                token_one['T_ID'] = i;
+                token_one['T_URI'] = result;
+                token_object.push(token_one);
+
+            });
+        }
+        setToken_Total(token_object);
+        console.log(TotalObject);
+    }
+    check_total();
+
+    
 
     function numberSort(){
         
