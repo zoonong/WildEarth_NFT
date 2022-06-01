@@ -9,7 +9,7 @@ export default function Buy() {
     let back_color = {background:"#43BCC6", fontSize:"110%"}
     let info5_st = {color:"black", fontWeight: 'bold'};
     let NFTinfo = useLocation();
-
+    console.log(NFTinfo)
     return(
         <div className='buyBack'>
             <br></br>

@@ -67,16 +67,40 @@ function NFT_sell(props) {
     );
 };
 
-function ShowNFT({NFT_name,NFT_url,NFT_number}){
-    let [show,setshow] = useState(false);
+async function GetInfo(jsonAddress){
+    let Data = await axios.get(jsonAddress);
+    let str = JSON.stringify(Data);
+    let jsonArray = await JSON.parse(str);
+    let res = jsonArray.data
+    return res;
+}
 
+
+function ShowNFT({NFT_url,NFT_number}){
+    let [show,setshow] = useState(false);
+    let [data,setData] = useState(null);
+    let [att, setAtt] = useState(null);
+
+    useEffect(()=>{
+        const info = async()=>{
+            const arr = await GetInfo(NFT_url);
+            setData(arr);
+            const arr1 = Object.values(arr.attributes);
+            setAtt(arr1[1].value)
+        }
+        info();
+    },[]);
+
+    if(!data || !att){
+        return null;
+    }
     return(
         <div className='profileImg'>
             <Card className='profileCard'>
-                <Card.Img variant="bottom" src={NFT_url}  onClick={()=>{setshow(!show);}} />
+                <Card.Img variant="bottom" src={data.image}  onClick={()=>{setshow(!show);}} />
                 <Card.Body className='profileCardBody' onClick={()=>{setshow(!show);}}>
                     <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                        #{NFT_number} : {NFT_name}
+                        #{NFT_number} : {att}
                         <br/>
                     </Card.Text>
                 </Card.Body>
@@ -88,39 +112,6 @@ function ShowNFT({NFT_name,NFT_url,NFT_number}){
     );
 
 };
-// const Collected_NFT = [
-//     {
-//         NAME: "반달가슴곰",
-//         URL_: "\\img\\bear.png",
-//         Num_: "1" 
-//     },
-//     {
-//         NAME: "수리부엉이",
-//         URL_: "\\img\\owl.png",
-//         Num_: "2" 
-//     },
-//     {
-//         NAME: "하프물범",
-//         URL_: "\\img\\seal.png",
-//         Num_: "3" 
-//     },
-//     {
-//         NAME: "반달가슴곰",
-//         URL_: "\\img\\bear.png",
-//         Num_: "4" 
-//     },
-//     {
-//         NAME: "수리부엉이",
-//         URL_: "\\img\\owl.png",
-//         Num_: "5" 
-//     },
-//     {
-//         NAME: "하프물범",
-//         URL_: "\\img\\seal.png",
-//         Num_: "6" 
-//     }   
-// ];
-
 
 
 function Profile() {
@@ -137,7 +128,7 @@ function Profile() {
         caver = new Caver(window.klaytn);
         accounts = await window.klaytn.enable();
         account = accounts[0]
-        myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+        myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
         console.log(myContract)
 
         myContract.options.address=CONTRACTADDRESS
@@ -180,7 +171,6 @@ function Profile() {
             });
         }
 
-
         for (var i of token_temp){
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
@@ -198,36 +188,23 @@ function Profile() {
         
     }
 
-    //check_wallet();
+    check_wallet();
+ 
     
     // console.log(myToken);
     // console.log(myTokenURI);
-    console.log(TokenObject)
+    // console.log(TokenObject)
 
-
-    var [data, setData] = useState(["team3"]);
-    const url = "https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/f8dc0fb7-4d95-1884-5350-e783905517d2.json";
-
-    useEffect(()=>{
-      axios.get(url).then(function(response) {
-        setData(response.data);
-    });
-    },[]);
-
-    var arr = Object.values(data)
-
-    const Collected_NFT = [{
-        NAME: arr[0][1].value,
-        URL_: data.image,
-        NUM_: data.edition
-        // Hat : arr[0][2].value,
-        // Necklace : arr[0][3].value,
-        // BG : arr[0][0]
-        
-    }]
-
-
-
+    const Information = [
+        {
+            T_ID : '7',
+            T_URI : "https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/fee0c422-6826-47c5-f3db-539df3c57e89.json"
+        },
+        {
+            T_ID :'8',
+            T_URI :'https://metadata-store.klaytnapi.com/9a3233de-9aa6-694c-df21-50632eee371e/47e24e0b-4ebe-6e24-5a95-cf89bc329ee7.json'
+        }
+    ];
 
     return (
         <>
@@ -282,8 +259,8 @@ function Profile() {
                     COLLECTED
                 </div>
                 <div className='profileList'>
-                    {Collected_NFT.map(NFT=>(
-                        <ShowNFT NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.NUM_}/>
+                    {Information.map(NFT=>(
+                        <ShowNFT NFT_url={NFT.T_URI} NFT_number={NFT.T_ID}/>
                     ))}
                 </div>
             </div>
