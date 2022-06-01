@@ -2,11 +2,11 @@ import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Buy.css';
 import { useState } from 'react';
-import { Card, Button , Nav, Navbar, Container} from 'react-bootstrap';
+import { Card, Button , Nav, Navbar, Container,ListGroup} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
 export default function Buy() {
-    let back_color = {background:"#43BCC6"}
+    let back_color = {background:"#43BCC6", fontSize:"110%"}
     let info5_st = {color:"black", fontWeight: 'bold'};
     let NFTinfo = useLocation();
 
@@ -15,68 +15,53 @@ export default function Buy() {
             <br></br>
             <div className='Buy_frame_top'>
                 <div className='NFT_img_card'>
-                    <Card>
+                    <Card className='buyNFTCard'>
                         <Card.Img variant="bottom" src={NFTinfo.state.Src} />
                             <Card.Body>
                                 <Card.Text style={{fontWeight:"bold"}}>
-                                    {NFTinfo.state.Nname}
                                 </Card.Text>
                             </Card.Body>
                     </Card>
                 </div>
 
-                <div className='NFT_info_card'>
-                <Card>
-                    <Card.Header style={back_color}>
-                        {NFTinfo.state.Nname} NFT의 상세정보
-                    </Card.Header>
-                    <br></br>
-                    <Card.Body>
-                        <br></br>
-                        <Card.Text>
-                            <table className='table_B'>
-                                <tr>
-                                    <th className='th_2'>동물 이름</th>
-                                    <td className='td_2'>{NFTinfo.state.Nname}</td>
-                                </tr>
-                                <tr>
-                                    <th className='th_2'>배경</th>
-                                    <td className='td_2'>{NFTinfo.state.Nname}</td>
-                                </tr>
-                                <tr>
-                                    <th className='th_2'>악세사리</th>
-                                    <td className='td_2'>{NFTinfo.state.Nname}</td>
-                                </tr>
-                                <tr>
-                                    <th className='th_2'>등록일</th>
-                                    <td className='td_2'>{NFTinfo.state.Nname}</td>
-                                </tr>
-                                <tr>
-                                    <th className='th_2'>가격</th>
-                                    <td className='td_2'>{NFTinfo.state.Cost}</td>
-                                </tr>
-                                <tr>
-                                    <th className='th_2'>등급</th>
-                                    <td style={info5_st}>{NFTinfo.state.Nid}</td>
-                                </tr>
-                            </table>
-                        </Card.Text>
-                        <div className='NFT_buy_btn'>
-                            <Button  variant="light" style={back_color}>
+                <div className='buyTopRight'>
+                    <div className='buyTopRightTitle'>
+                        {NFTinfo.state.Nname} #{NFTinfo.state.Nid}
+                    </div>
+                    <div className='buyTopRightDate'>
+                        {NFTinfo.state.Nname}
+                    </div>
+                    <div className='buytopRightInfo'>
+                        배경 {NFTinfo.state.Nname}
+                        <div className='buytopRightInfoLine'></div>
+                        모자 {NFTinfo.state.Nname}
+                        <div className='buytopRightInfoLine'></div>
+                        목걸이 {NFTinfo.state.Nname}
+                    </div>
+                    <div className='buyTopRightBuy'>
+                        Price
+                        <div className='buyTopRightPrice'>
+                            <div className='buyTopRightLogo'>
+                                <img src='\img\Klaytn-Logo.png' width = '45' height= '45'></img>
+                            </div>
+        
+                            {NFTinfo.state.Cost}
+                        </div>
+                        <div >
+                            <Button className='buyTopRightButton' variant="light" style={back_color}>
                                 구매하기
                             </Button>
                         </div>
-                    </Card.Body>
-                </Card>
+                    </div>
                 </div>
-
             </div>
 
             <br></br>
         <br></br>
 
-        <h2>{NFTinfo.state.Nname}과 관련된 더 많은 NFT</h2>
-        <br/>
+        <div className='buyBottomText'>
+            More From This NFT
+        </div>
         <div className='Buy_frame_bottom'>
             <div className='Buy_nft_card'>
                     <Card>
