@@ -6,6 +6,68 @@ import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropd
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
 import './/pagecss/Explore.css';
+import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
+import Caver from 'caver-js';
+import '../App.css';
+import {CONTRACTADDRESS, ABI} from '../config';
+
+const CHAIN_ID = '1001'; //테스트넷
+
+const option = {
+  headers: [
+    {
+      name: "Authorization",
+      value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+    },
+    {name: "x-chain-id", value:CHAIN_ID}
+  ]
+}
+
+const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+const NFTContract = new caver.contract(ABI, CONTRACTADDRESS);
+
+const TotalNFT = async () => {
+    const total = await NFTContract.methods.totalSupply().call();
+    console.log(total);
+    var tokenIDs = []
+    var tokenURIS = []
+    var tokenJson = []
+    var nfts = []
+    for (var i = 0; i<total; i++){
+        const nftIndex = await NFTContract.methods.tokenByIndex(i).call();
+        tokenIDs.push(nftIndex);
+    }
+    for (var i = 0; i < tokenIDs.length; i++){
+        const nftURI = await NFTContract.methods.tokenURI(tokenIDs[i]).call();
+        tokenURIS.push(nftURI);
+    }
+
+    for (var i = 0; i < tokenURIS.length+1; i++){
+        fetch(tokenURIS[i])
+        .then(res => res.json())
+        .then((out) => {
+            tokenJson.push(out.image)
+        })
+    }
+
+    // var request = new XMLHttpRequest();
+    // for (var i = 0; i < tokenURIS.length; i++){
+    //     request.open('GET', tokenURIS[i]);
+    //     request.responseType = 'json';
+    //     request.send();
+    //     request.onload = function() {
+    //         var jsontext = request.response;
+    //         tokenJson.push(jsontext);
+    //     }
+    // }
+
+    for (var i = 0; i < tokenIDs.length; i++){
+        nfts.push({id : tokenIDs[i], uri: tokenURIS[i]});
+    }
+    console.log(tokenJson);
+    console.log(nfts);
+    return nfts;
+}
 
 const MarketNFT = [
     {
@@ -120,6 +182,12 @@ function Ranking({NFT_name,NFT_url}){
 };
 
 function Explore() {
+    const [nfts, setNfts] = useState([]);
+
+    const allnfts = async () => {
+        const _nfts = await TotalNFT();
+        setNfts(_nfts);
+    }
 
     function numberSort(){
         
@@ -133,6 +201,7 @@ function Explore() {
 
     return (
         <>
+        
         <div className='exploreBack'>
             <div className='rankingBack'>
                 <div className='rankingTxt' style={{textAlign:"left",fontWeight:"bold"}}>
@@ -150,6 +219,7 @@ function Explore() {
             <div className='marketBack'>
                 <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}}>
                     MARKET
+                    <button onClick={allnfts}>NFT 조회</button>
                 </div>
                 <div className="sortBack">
                     <DropdownButton id="marketSort" variant='light' size='larger' title="Sort By" textAlign="right">
@@ -159,11 +229,17 @@ function Explore() {
                     </DropdownButton> 
                 </div>
                 <div className='marketList'>
+                    {nfts.map((nft, index) => (
+                        <p>{nfts[index].uri}</p>
+                    )
+                    )}
+                </div>
+                {/* <div className='marketList'>
                     {MarketNFT.map(NFT=>(
                     <Link to={`/Buy/${NFT.Num_}`} style={{textDecoration: 'none', color:'black'}} state={{Nname : NFT.NAME, Src : NFT.URL_, Cost : NFT.Price, Nid : NFT.Num_}}>
                         <NFTList NFT_name={NFT.NAME} NFT_url={NFT.URL_} NFT_number={NFT.Num_} NFT_price={NFT.Price}/>
                     </Link>))}
-                </div>
+                </div> */}
             </div>
             <div className='btmBar' fixed='bottom'>
                 <div className='btmBarTop'>
