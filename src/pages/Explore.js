@@ -195,42 +195,96 @@ function Explore() {
     let accounts;
     let account;
     let [TotalObject,setToken_Total] = useState([]);
+    let [SaleObject, setSale_Object] = useState([]);
+
+    async function check_onsale(){
+        accounts = await window.klaytn.enable();
+        account = accounts[0];
+
+
+        var last = 0;
+        var token_sale = [];
+        var index = 0;
+        myContract = new caver.contract(ABI, CONTRACTADDRESS);
+        var token_temp = [];
+
+        await myContract.methods.getOnSaleAnimalTokenArrayLength().call() // 전체 NFT 개수 확인
+            .then(function(result){
+                last = result;
+        });
+        while(index<last){
+            await myContract.methods.onSaleAnimalTokenArray(index).call()
+            .then(function(result){
+                token_temp.push(result);
+                index += 1;
+            })
+            .catch(function (error){
+                console.log(error)
+            });
+        }
+        for (var i of token_temp){
+            var token_one = new Object();
+            await myContract.methods.tokenURI(i).call()
+            .then(function(result){
+                
+                token_one['T_ID'] = i;
+                token_one['T_URI'] = result;
+                
+            });
+
+            await myContract.methods.animalTokenPrices(i).call()
+            .then(function(result){
+                token_one['T_Price'] = result;
+                token_sale.push(token_one);
+            })
+        }
+        setSale_Object(token_sale);
+        // console.log(SaleObject);
+
+
+    }
 
     async function check_total(){
 
         accounts = await window.klaytn.enable();
         account = accounts[0];
         myContract = new caver.contract(ABI, CONTRACTADDRESS);
+ 
+        
 
-        // 소유권 확인
-        let index = 0;
-        let last = 0;
-        let token_temp = [];
+        // 전체 NFT 확인
+
+        var last = 0;
         let token_object = [];
 
         await myContract.methods.totalSupply().call() // 전체 NFT 개수 확인
             .then(function(result){
                 last = result;
         });
-        console.log(last);
 
     
 
         for (var i =1; i<= last; i++){
+            var token_one = new Object();
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
-                var token_one = new Object();
+                
                 token_one['T_ID'] = i;
                 token_one['T_URI'] = result;
+                
+            });
+            await myContract.methods.animalTokenPrices(i).call()
+            .then(function(result){
+                token_one['T_Price'] = result;
                 token_object.push(token_one);
-
             });
         }
         setToken_Total(token_object);
         console.log(TotalObject);
     }
-    check_total();
-
+    check_total(); // TotalObject 에 담김
+    check_onsale(); // SaleObject 에 담김
+    
     
 
     function numberSort(){
