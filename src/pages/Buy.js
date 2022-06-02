@@ -1,42 +1,67 @@
 import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Buy.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button , Nav, Navbar, Container,ListGroup} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+
+async function GetInfo(jsonAddress){
+    let Data = await axios.get(jsonAddress);
+    let str = JSON.stringify(Data);
+    let jsonArray = await JSON.parse(str);
+    let res = jsonArray.data
+    return res;
+}
 
 export default function Buy() {
     let back_color = {background:"#43BCC6", fontSize:"110%"}
     let info5_st = {color:"black", fontWeight: 'bold'};
     let NFTinfo = useLocation();
     console.log(NFTinfo)
+    let [data,setData] = useState(null);
+    let [att, setAtt] = useState(null);
+    let cost = NFTinfo.state.Cost/(10**18);
+    let [show, setShow] = useState(true);
+
+    useEffect(()=>{
+        const info = async()=>{
+            const arr = await GetInfo(NFTinfo.state.jsonAddress);
+            setData(arr);
+            const arr1 = Object.values(arr.attributes);
+            console.log(arr1);
+            setAtt([arr1[0].value, arr1[1].value, arr1[2].value, arr1[3].value]);
+        }
+        info();
+    },[]);
+
+    if(!data || !att){
+        return null;
+    }
+
     return(
         <div className='buyBack'>
             <br></br>
             <div className='Buy_frame_top'>
                 <div className='NFT_img_card'>
                     <Card className='buyNFTCard'>
-                        <Card.Img variant="bottom" src={NFTinfo.state.Src} />
-                            <Card.Body>
-                                <Card.Text style={{fontWeight:"bold"}}>
-                                </Card.Text>
-                            </Card.Body>
+                        <Card.Img variant="bottom" src={data.image} />
                     </Card>
                 </div>
 
                 <div className='buyTopRight'>
                     <div className='buyTopRightTitle'>
-                        {NFTinfo.state.Nname} #{NFTinfo.state.Nid}
+                        #{NFTinfo.state.Nid} : {att[1]}
                     </div>
                     <div className='buyTopRightDate'>
-                        {NFTinfo.state.Nname}
+                        
                     </div>
                     <div className='buytopRightInfo'>
-                        배경 {NFTinfo.state.Nname}
+                        배경<br/>{att[0]}
                         <div className='buytopRightInfoLine'></div>
-                        모자 {NFTinfo.state.Nname}
+                        모자<br/>{att[2]}
                         <div className='buytopRightInfoLine'></div>
-                        목걸이 {NFTinfo.state.Nname}
+                        목걸이<br/>{att[3]}
                     </div>
                     <div className='buyTopRightBuy'>
                         Price
@@ -44,8 +69,7 @@ export default function Buy() {
                             <div className='buyTopRightLogo'>
                                 <img src='\img\Klaytn-Logo.png' width = '45' height= '45'></img>
                             </div>
-        
-                            {NFTinfo.state.Cost}
+                            {cost}
                         </div>
                         <div >
                             <Button className='buyTopRightButton' variant="light" style={back_color}>
@@ -65,25 +89,19 @@ export default function Buy() {
         <div className='Buy_frame_bottom'>
             <div className='Buy_nft_card'>
                     <Card>
-                        <Card.Img variant="bottom" src={NFTinfo.state.Src} />
-                        <Card.Body>
-                        </Card.Body>
+                        <Card.Img variant="bottom" src={data.image} />
                     </Card>
             </div>
 
             <div className='Buy_nft_card'>
                     <Card>
-                        <Card.Img variant="bottom" src={NFTinfo.state.Src} />
-                        <Card.Body>
-                        </Card.Body>
+                        <Card.Img variant="bottom" src={data.image} />
                     </Card>
             </div>
 
             <div className='Buy_nft_card'>
                     <Card>
-                        <Card.Img variant="bottom" src= {NFTinfo.state.Src} />
-                        <Card.Body>
-                        </Card.Body>
+                        <Card.Img variant="bottom" src= {data.image} />
                     </Card>
             </div>
         </div>

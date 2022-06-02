@@ -2,15 +2,14 @@ import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Profile.css';
 import { useState, useEffect, useRef } from 'react';
-import { Carousel, Dropdown, DropdownButton, Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
+import { Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 import {CONTRACTADDRESS, ABI} from '../config';
 import Caver from 'caver-js';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 
-var profile_name = 'DEFAULT_NAME'
-var profile_no = '0000'
+
 // var wallet_address = account
 
 let back_color = {background:"#E0FACC"}

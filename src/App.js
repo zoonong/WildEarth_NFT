@@ -47,7 +47,7 @@ async function connect() {
 }
 
 function App() {
-  let nav_st = {background:"#FFFFFF", fontWeight: 'bold'}
+  let nav_st = {background:"#FFFFFF", fontWeight: 'bold'};
   return (
     <div className="App">
       <BrowserRouter>
@@ -61,7 +61,7 @@ function App() {
             <Nav.Link className="navLinkAnimal" href="/Animal">Animal</Nav.Link>
             <Nav.Link className="navLinkExplore" href="/Explore">Explore</Nav.Link>
             <Nav.Link className="navLinkProfile" href="/Profile" id='profileLink'></Nav.Link>
-            <Nav.Link href="/Login">Login</Nav.Link>
+            {/* <Nav.Link href="/Login">Login</Nav.Link> */}
             <Nav.Link className='navLinkConnect' variant='secondary' onClick={connect} id="connectButton">Connect</Nav.Link>
           </Nav>
           </Container>
