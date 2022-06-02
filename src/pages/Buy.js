@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { Card, Button , Nav, Navbar, Container,ListGroup} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Caver from "caver-js";
+import {ABI, CONTRACTADDRESS} from "../config";
 
 async function GetInfo(jsonAddress){
     let Data = await axios.get(jsonAddress);
@@ -12,6 +14,33 @@ async function GetInfo(jsonAddress){
     let jsonArray = await JSON.parse(str);
     let res = jsonArray.data
     return res;
+}
+let caver = new Caver(window.klaytn);
+let account;
+async function _purchaseAnimalToken(tokenID){
+
+    caver = new Caver(window.klaytn);
+    let accounts = await window.klaytn.enable();
+    account = accounts[0]
+    let myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+    var OnSaleAnimalTokenArrayLength = await myContract.methods.getOnSaleAnimalTokenArrayLength().call()
+
+    console.log(OnSaleAnimalTokenArrayLength)
+
+    var _value = await myContract.methods.animalTokenPrices(tokenID).call()/(10**18);
+    console.log(_value)
+
+    await myContract.methods.purchaseAnimalToken(tokenID).send({from: account, gas: 3000000, value: caver.utils.convertToPeb(_value, 'KLAY')})
+        .then(function() {
+            alert("구매가 완료 되었습니다..")
+            window.location.reload();
+        })
+        .catch(function (error) {
+            console.log(error)
+            alert("KLAY 부족 OR 이미 보유 중입니다.")
+            window.location.reload();
+        })
+
 }
 
 export default function Buy() {
@@ -72,7 +101,9 @@ export default function Buy() {
                             {cost}
                         </div>
                         <div >
-                            <Button className='buyTopRightButton' variant="light" style={back_color}>
+                            <Button className='buyTopRightButton' variant="light" style={back_color} onClick={() =>{
+                                _purchaseAnimalToken(NFTinfo.state.Nid)
+                            }}>
                                 구매하기
                             </Button>
                         </div>
