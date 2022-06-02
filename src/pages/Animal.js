@@ -144,7 +144,7 @@ export default function Animal() {
                     <Card onClick={to_bear}>
                         <Card.Img variant="bottom" src='\img\bear.png' />
                         <Card.Body>
-                            반달가슴곰의 정보 보기
+                            반달가슴곰의<br></br> 정보 보기
                         </Card.Body>
                     </Card>
             </div>
@@ -152,7 +152,7 @@ export default function Animal() {
                     <Card onClick={to_owl}>
                         <Card.Img variant="bottom" src='\img\owl.png' />
                         <Card.Body>
-                            수리부엉이의 정보 보기
+                            수리부엉이의<br></br> 정보 보기
                         </Card.Body>
                     </Card>
             </div>
@@ -160,7 +160,7 @@ export default function Animal() {
                     <Card onClick={to_moneky}>
                         <Card.Img variant="bottom" src='\img\monkey.png' />
                         <Card.Body>
-                            시아우 안경원숭이의 정보 보기
+                            시아우 안경원숭이의<br></br> 정보 보기
                         </Card.Body>
                     </Card>
             </div>
@@ -168,7 +168,7 @@ export default function Animal() {
                     <Card onClick={to_cheetah}>
                         <Card.Img variant="bottom" src='\img\cheetah.png' />
                         <Card.Body>
-                            치타의 정보 보기
+                            치타의<br></br> 정보 보기
                         </Card.Body>
                     </Card>
             </div>
@@ -176,7 +176,7 @@ export default function Animal() {
                     <Card onClick={to_seal}>
                         <Card.Img variant="bottom" src='\img\seal.png' />
                         <Card.Body>
-                            하프 물범의 정보 보기
+                            하프 물범의<br></br> 정보 보기
                         </Card.Body>
                     </Card>
             </div>
