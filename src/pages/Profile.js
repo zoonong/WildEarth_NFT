@@ -170,13 +170,20 @@ function Profile() {
                 console.log(error); 
             });
         }
-
+        
+        
         for (var i of token_temp){
+            var token_one = new Object();
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
-                var token_one = new Object();
+                
                 token_one['T_ID'] = i;
                 token_one['T_URI'] = result;
+                
+            });
+            await myContract.methods.animalTokenPrices(i).call()
+            .then(function(result){
+                token_one['T_Price'] = result;
                 token_object.push(token_one);
             });
 
@@ -185,6 +192,8 @@ function Profile() {
         setToken_Object(token_object);
         // setToken(token_temp);
         // setTokenURI(tokenURI_temp);
+        console.log(TokenObject);
+
         
     }
 

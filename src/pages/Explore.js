@@ -164,7 +164,7 @@ function Explore() {
                 last = result;
         });
         while(index<last){
-            await myContract.methods.getOnSaleAnimalToken(index).call()
+            await myContract.methods.onSaleAnimalTokenArray(index).call()
             .then(function(result){
                 token_temp.push(result);
                 index += 1;
@@ -174,16 +174,23 @@ function Explore() {
             });
         }
         for (var i of token_temp){
+            var token_one = new Object();
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
-                var token_one = new Object();
+                
                 token_one['T_ID'] = i;
                 token_one['T_URI'] = result;
-                token_sale.push(token_one);
+                
             });
+
+            await myContract.methods.animalTokenPrices(i).call()
+            .then(function(result){
+                token_one['T_Price'] = result;
+                token_sale.push(token_one);
+            })
         }
         setSale_Object(token_sale);
-        console.log(SaleObject);
+        // console.log(SaleObject);
 
 
     }
@@ -193,8 +200,10 @@ function Explore() {
         accounts = await window.klaytn.enable();
         account = accounts[0];
         myContract = new caver.contract(ABI, CONTRACTADDRESS);
+ 
+        
 
-        // 소유권 확인
+        // 전체 NFT 확인
 
         var last = 0;
         let token_object = [];
@@ -207,21 +216,26 @@ function Explore() {
     
 
         for (var i =1; i<= last; i++){
+            var token_one = new Object();
             await myContract.methods.tokenURI(i).call()
             .then(function(result){
-                var token_one = new Object();
+                
                 token_one['T_ID'] = i;
                 token_one['T_URI'] = result;
+                
+            });
+            await myContract.methods.animalTokenPrices(i).call()
+            .then(function(result){
+                token_one['T_Price'] = result;
                 token_object.push(token_one);
-
             });
         }
         setToken_Total(token_object);
-        // console.log(TotalObject);
+        console.log(TotalObject);
     }
-    check_total();
-    check_onsale();
-
+    check_total(); // TotalObject 에 담김
+    check_onsale(); // SaleObject 에 담김
+    
     
 
     function numberSort(){
