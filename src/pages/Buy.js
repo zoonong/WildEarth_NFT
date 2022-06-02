@@ -53,6 +53,14 @@ export default function Buy() {
     let cost = NFTinfo.state.Cost/(10**18);
     let [show, setShow] = useState(true);
 
+
+
+    useEffect(()=>{
+        if (cost == 0){
+            setShow(false);
+        }
+    },[]);
+
     useEffect(()=>{
         const info = async()=>{
             const arr = await GetInfo(NFTinfo.state.jsonAddress);
@@ -101,11 +109,11 @@ export default function Buy() {
                             {cost}
                         </div>
                         <div >
-                            <Button className='buyTopRightButton' variant="light" style={back_color} onClick={() =>{
+                            {show && <Button className='buyTopRightButton' variant="light" style={back_color} onClick={() =>{
                                 _purchaseAnimalToken(NFTinfo.state.Nid)
                             }}>
                                 구매하기
-                            </Button>
+                            </Button>}
                         </div>
                     </div>
                 </div>
