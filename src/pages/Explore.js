@@ -5,9 +5,6 @@ import logo from '../logo.svg';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
-import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
-import Caver from 'caver-js';
-import {CONTRACTADDRESS, ABI} from '../config';
 import axios from 'axios';
 import './/pagecss/Explore.css';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
@@ -27,7 +24,7 @@ const option = {
   ]
 }
 
-const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 const NFTContract = new caver.contract(ABI, CONTRACTADDRESS);
 
 const TotalNFT = async () => {
@@ -72,22 +69,6 @@ const TotalNFT = async () => {
     console.log(nfts);
     return nfts;
 }
-
-const CHAIN_ID = '1001'; //테스트넷
-
-
-
-const option = {
-    headers: [
-      {
-        name: "Authorization",
-        value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
-      },
-      {name: "x-chain-id", value:CHAIN_ID}
-    ]
-  }
-
-let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 
 const MarketNFT = [
     {
