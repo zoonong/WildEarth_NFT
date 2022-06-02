@@ -5,7 +5,6 @@ import logo from '../logo.svg';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
-import axios from 'axios';
 import './/pagecss/Explore.css';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 import Caver from 'caver-js';
@@ -24,32 +23,34 @@ const option = {
   ]
 }
 
-let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
+const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 const NFTContract = new caver.contract(ABI, CONTRACTADDRESS);
 
 const TotalNFT = async () => {
     const total = await NFTContract.methods.totalSupply().call();
     console.log(total);
     var tokenIDs = []
-    var tokenURIS = []
-    var tokenJson = []
+    var tokenURIs = []
+    var tokenimg = []
     var nfts = []
     for (var i = 0; i<total; i++){
         const nftIndex = await NFTContract.methods.tokenByIndex(i).call();
         tokenIDs.push(nftIndex);
     }
+
     for (var i = 0; i < tokenIDs.length; i++){
         const nftURI = await NFTContract.methods.tokenURI(tokenIDs[i]).call();
-        tokenURIS.push(nftURI);
-    }
-
-    for (var i = 0; i < tokenURIS.length+1; i++){
-        fetch(tokenURIS[i])
+        fetch(nftURI)
         .then(res => res.json())
         .then((out) => {
-            tokenJson.push(out.image)
+            tokenimg.push(out.image)
         })
     }
+    for (var i = 0; i < tokenIDs.length; i++){
+        const nftURI = await NFTContract.methods.tokenURI(tokenIDs[i]).call();
+        tokenURIs.push(nftURI);
+    }
+
 
     // var request = new XMLHttpRequest();
     // for (var i = 0; i < tokenURIS.length; i++){
@@ -63,9 +64,11 @@ const TotalNFT = async () => {
     // }
 
     for (var i = 0; i < tokenIDs.length; i++){
-        nfts.push({id : tokenIDs[i], uri: tokenURIS[i]});
+        nfts.push({id : tokenIDs[i], uri: tokenURIs[i], image: tokenimg[i]});
     }
-    console.log(tokenJson);
+    console.log(tokenIDs);
+    console.log(tokenURIs);
+    console.log(tokenimg);
     console.log(nfts);
     return nfts;
 }
@@ -190,49 +193,6 @@ function Explore() {
         setNfts(_nfts);
     }
 
-    let myContract;
-
-    let accounts;
-    let account;
-    let [TotalObject,setToken_Total] = useState([]);
-
-    async function check_total(){
-
-        accounts = await window.klaytn.enable();
-        account = accounts[0];
-        myContract = new caver.contract(ABI, CONTRACTADDRESS);
-
-        // 소유권 확인
-        let index = 0;
-        let last = 0;
-        let token_temp = [];
-        let token_object = [];
-
-        await myContract.methods.totalSupply().call() // 전체 NFT 개수 확인
-            .then(function(result){
-                last = result;
-        });
-        console.log(last);
-
-    
-
-        for (var i =1; i<= last; i++){
-            await myContract.methods.tokenURI(i).call()
-            .then(function(result){
-                var token_one = new Object();
-                token_one['T_ID'] = i;
-                token_one['T_URI'] = result;
-                token_object.push(token_one);
-
-            });
-        }
-        setToken_Total(token_object);
-        console.log(TotalObject);
-    }
-    check_total();
-
-    
-
     function numberSort(){
         
     }
@@ -245,7 +205,6 @@ function Explore() {
 
     return (
         <>
-        
         <div className='exploreBack'>
             <div className='rankingBack'>
                 <div className='rankingTxt' style={{textAlign:"left",fontWeight:"bold"}}>
@@ -261,9 +220,9 @@ function Explore() {
                 </div>
             </div>
             <div className='marketBack'>
-                <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}}>
+                <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}} onClick={allnfts()}>
                     MARKET
-                    <button onClick={allnfts}>NFT 조회</button>
+                    {/* <button onClick={allnfts()}></button> */}
                 </div>
                 <div className="sortBack">
                     <DropdownButton id="marketSort" variant='light' size='larger' title="Sort By" textAlign="right">
@@ -274,7 +233,12 @@ function Explore() {
                 </div>
                 <div className='marketList'>
                     {nfts.map((nft, index) => (
-                        <p>{nfts[index].uri}</p>
+                        <>
+                        <Link to={`/Buy/${nfts[index].id}`} style={{textDecoration: 'none', color:'black'}} state={{Src : nfts[index].image, Nid : nfts[index].id}}>
+                            <NFTList NFT_url={nfts[index].image} NFT_number={nfts[index].id}/>
+                        </Link>
+                        {/* <p>{nfts[index].image}</p> */}
+                        </>
                     )
                     )}
                 </div>
