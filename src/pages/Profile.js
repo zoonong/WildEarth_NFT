@@ -48,9 +48,17 @@ function NFT_sell(props) {
 
         myContract.options.address=CONTRACTADDRESS
         await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
+            .then(function() {
+                alert("판매가 완료 되었습니다.")
+                window.location.reload();
+            })
+            .catch(function () {
+                alert("이미 판매 중인 코인입니다.")
+                window.location.reload();
+            })
         animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
         console.log(animalTokenPrices)
-        alert("판매가 완료 되었습니다.")
+
     }
 
     return(
@@ -133,14 +141,17 @@ function Profile() {
 
         myContract.options.address=CONTRACTADDRESS
         await myContract.methods.airDropMint(walletAddress, jsonAddress).send({from: account, gas: 3000000})
+            .then(function() {
+                alert('민팅이 완료되었습니다.')
+                window.location.reload();
+            })
+            .catch(function () {
+                alert("관리자가 아닙니다.")
+                    window.location.reload();
+            })
 
         const totalSupply = await myContract.methods.totalSupply().call();
         console.log(totalSupply)
-
-        document.getElementById("walletAddress").value = null
-        document.getElementById("JSON_URL").value = null
-
-        alert("민팅이 완료 되었습니다.")
     }
     
     async function check_wallet(){
