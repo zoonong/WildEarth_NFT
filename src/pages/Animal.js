@@ -24,6 +24,7 @@ export default function Animal() {
         change_color("orange");
         change_link("https://animalia.bio/asiatic-black-bear");
         change_animal_info(" 반달가슴곰은 아시아흑곰이라고도 불리며 검은색 털과 가슴 부위에 초승달 모양의 흰 털을 가진 곰의 일종입니다. \n\n 한국과 중국 북동부 지역, 러시아 연해주 지역에 주로 서식하지만 우리나라에서는 야생에 서식하는 반달가슴곰의 개체수는 백마리 이하로 멸종 취약종에 속해있습니다.");
+        window.scrollTo(0, 0);
     }
 
     function to_owl(){
@@ -34,6 +35,7 @@ export default function Animal() {
         change_color("#f8db00");
         change_link("https://animalia.bio/eurasian-eagle-owl");
         change_animal_info(" 수리부엉이는 부엉이 중 가장 크고 세며 야행성인 올빼미과의 맹금류입니다. \n\n 한국과 중국을 포함한 동아시아, 유럽 전역에 분포되어 있지만 우리나라에서는 멸종위기 2급으로 지정된 천연기념물입니다.");
+        window.scrollTo(0, 0);
     };
 
     function to_moneky(){
@@ -44,6 +46,7 @@ export default function Animal() {
         change_color("red");
         change_link("https://www.speciesonthebrink.org/species/siau-island-tarsier/");
         change_animal_info(" 시아우 안경원숭이는 인도네시아의 시아우섬에 사는 안경원숭이며 영장류 중 가장 작고 유일하게 육식을 하는 원숭이입니다. \n\n 시아우 섬에만 서식하고 있으며 개체수가 매우 적고 섬 원주민에 의해 매년 줄고 있어 세계에서 가장 멸종위기에 처한 동물 중 하나입니다.");
+        window.scrollTo(0, 0);
     };
 
     function to_cheetah(){
@@ -54,6 +57,7 @@ export default function Animal() {
         change_color("orange");
         change_link("https://animalia.bio/cheetah");
         change_animal_info(" 치타는 지상에서 가장 빠른 생물이며 검은 점박이 무늬가 특징인 고양잇과 동물입니다. \n\n 대부분이 사하라 이남 아프리카에 서식하며 치타의 무늬를 노린 밀렵꾼들의 사냥이나 사자나 표범 등과의 경쟁으로 향후 멸종 가능성이 매우 높은 동물 중 하나입니다.");
+        window.scrollTo(0, 0);
     };
 
     function to_seal(){
@@ -64,6 +68,7 @@ export default function Animal() {
         change_color("#f8db00");
         change_link("https://animalia.bio/harp-seal");
         change_animal_info(" 하프 물범은 크면 하프 무늬가 생기는 특징을 가진 물범과의 포유류입니다. \n\n 환경오염으로 인한 서식지 파괴나 사냥꾼들의 무분별한 사냥으로 개체수가 줄고 있는 멸종 관심 대상종 입니다.");
+        window.scrollTo(0, 0);
     };
 
   
