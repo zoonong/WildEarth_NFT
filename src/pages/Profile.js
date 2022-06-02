@@ -52,7 +52,7 @@ function NFT_sell(props) {
                 window.location.reload();
             })
             .catch(function () {
-                alert("이미 판매 중인 코인입니다.")
+                alert("이미 판매 중입니니다.")
                 window.location.reload();
             })
         animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
