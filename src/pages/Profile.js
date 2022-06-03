@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Profile.css';
 import { useState, useEffect, useRef } from 'react';
-import { Card, Button , Nav, Navbar, Container,Form} from 'react-bootstrap';
+import { Card, Button , Nav, Navbar, Container,Form, Badge} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 import {CONTRACTADDRESS, ABI} from '../config';
@@ -34,21 +34,46 @@ let caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytna
 
 
 function NFT_sell(props) {
+    let [sellstate, setSellstate] = useState(null);
+    let [NFTPrice, setPrice] = useState(null);
+
+    useEffect(()=>{
+        async function check_sellstate(){
+            caver = new Caver(window.klaytn);
+            let accounts = await window.klaytn.enable();
+            account = accounts[0]
+            let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+            let result = await myContract.methods.animalTokenPrices(props.NFT_number).call()
+            setPrice(result);
+        };
+        check_sellstate();
+    },[]);
+
+    useEffect(()=>{
+        if(!NFTPrice){
+            setSellstate(null);
+        }else if(NFTPrice == 0){
+            setSellstate(0);
+        }else{
+            setSellstate(1);
+        }
+    },[NFTPrice]);
+
     //sell
     async function _sell(NFT_number,cost){
         cost = Number(cost)
         caver = new Caver(window.klaytn);
         let accounts = await window.klaytn.enable();
         account = accounts[0]
-        let myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+        let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
         let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console.log(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
         await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
             .then(function() {
-                alert("판매가 완료 되었습니다.")
+                alert("판매등록이 완료 되었습니다.")
                 window.location.reload();
             })
             .catch(function () {
@@ -56,12 +81,11 @@ function NFT_sell(props) {
                 window.location.reload();
             })
         animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console.log(animalTokenPrices)
-
     }
 
-    return(
-        <div>
+    if(sellstate==0){
+        return(
+         <div>
             <Form.Group className="mb-3">
                 <Form.Control placeholder="COST(KLAY)" id="cost" type="number"/>
             </Form.Group>
@@ -71,7 +95,19 @@ function NFT_sell(props) {
                 Sell
             </Button>
         </div>
-    );
+        );
+    }else if(sellstate==1){
+        return(
+        <div>
+            <Button  variant="danger" onClick={() => {
+                _sell(props.NFT_number,document.getElementById("cost").value)
+            }}> Cancel </Button>
+        </div>
+        );
+    }else{
+        return null;
+    }
+   
 };
 
 async function GetInfo(jsonAddress){
@@ -93,10 +129,36 @@ function ShowNFT({NFT_url,NFT_number}){
             const arr = await GetInfo(NFT_url);
             setData(arr);
             const arr1 = Object.values(arr.attributes);
-            setAtt(arr1[1].value)
+            setAtt(arr1[1].value);
         }
         info();
     },[]);
+
+    let [sellstate, setSellstate] = useState(null);
+    let [NFTPrice, setPrice] = useState(null);
+
+    useEffect(()=>{
+        async function check_sellstate(){
+            caver = new Caver(window.klaytn);
+            let accounts = await window.klaytn.enable();
+            account = accounts[0]
+            let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+            let result = await myContract.methods.animalTokenPrices(NFT_number).call()
+            setPrice(result);
+        };
+        check_sellstate();
+    },[]);
+
+    useEffect(()=>{
+        if(!NFTPrice){
+            setSellstate(null);
+        }else if(NFTPrice == 0){
+            setSellstate(false);
+        }else{
+            setSellstate(true);
+        }
+    },[NFTPrice]);
 
     if(!data || !att){
         return null;
@@ -108,6 +170,7 @@ function ShowNFT({NFT_url,NFT_number}){
                 <Card.Body className='profileCardBody' onClick={()=>{setshow(!show);}}>
                     <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
                         #{NFT_number} : {att}
+                        {sellstate && <Badge bg="warning" text="dark" style={{marginLeft : "10px"}}>판매 중!</Badge> }
                         <br/>
                     </Card.Text>
                 </Card.Body>
@@ -202,7 +265,7 @@ function Profile() {
         setToken_Object(token_object);
         // setToken(token_temp);
         // setTokenURI(tokenURI_temp);
-        console.log(TokenObject);
+        // console.log(TokenObject);
 
         
     }
