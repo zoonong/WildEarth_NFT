@@ -69,19 +69,49 @@ function NFT_sell(props) {
         let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
         let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
+        console(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
+
         await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
             .then(function() {
+                console(animalTokenPrices)
                 alert("판매등록이 완료 되었습니다.")
                 window.location.reload();
             })
-            .catch(function () {
-                alert("이미 판매 중입니니다.")
+            .catch(function (e) {
+                console.log(e)
+                alert("Error 재접속 후 다시 시도해 주세요..")
                 window.location.reload();
             })
-        animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
+
     }
+    //cancel
+    async function _cancel(NFT_number){
+
+        caver = new Caver(window.klaytn);
+        let accounts = await window.klaytn.enable();
+        account = accounts[0]
+        let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+        let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
+        console.log(animalTokenPrices)
+
+        myContract.options.address=CONTRACTADDRESS
+
+        await myContract.methods.cancelSaleToken(NFT_number).send({from: account, gas: 3000000})
+            .then(function() {
+                alert("판매가 취소 완료 되었습니다.")
+                window.location.reload();
+            })
+            .catch(function (e) {
+                console.log(e)
+                alert("Error")
+                window.location.reload();
+            })
+
+    }
+
 
     if(sellstate==0){
         return(
@@ -100,7 +130,7 @@ function NFT_sell(props) {
         return(
         <div>
             <Button  variant="danger" onClick={() => {
-                _sell(props.NFT_number,document.getElementById("cost").value)
+                _cancel(props.NFT_number)
             }}> Cancel </Button>
         </div>
         );
