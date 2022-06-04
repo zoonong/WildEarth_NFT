@@ -43,7 +43,7 @@ function NFT_sell(props) {
         let myContract = await new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
         let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console.log(animalTokenPrices)
+        // console.log(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
         await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
@@ -56,7 +56,7 @@ function NFT_sell(props) {
                 window.location.reload();
             })
         animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console.log(animalTokenPrices)
+        // console.log(animalTokenPrices)
 
     }
 
@@ -150,7 +150,7 @@ function Profile() {
             })
 
         const totalSupply = await myContract.methods.totalSupply().call();
-        console.log(totalSupply)
+        // console.log(totalSupply)
     }
     
     async function check_wallet(){
@@ -202,7 +202,7 @@ function Profile() {
         setToken_Object(token_object);
         // setToken(token_temp);
         // setTokenURI(tokenURI_temp);
-        console.log(TokenObject);
+        // console.log(TokenObject);
 
         
     }

@@ -28,7 +28,7 @@ const NFTContract = new caver.contract(ABI, CONTRACTADDRESS);
 
 const TotalNFT = async () => {
     const total = await NFTContract.methods.totalSupply().call();
-    console.log(total);
+    // console.log(total);
     var tokenIDs = []
     var animalName = []
     var tokenURIs = []
@@ -64,10 +64,11 @@ const TotalNFT = async () => {
         tokenURIs.push(nftURI);
 
         nfts.push({id : tokenIDs[i], uri: tokenURIs[i], image: tokenimg[i], name: animalName[i], price: nftprice[i]});
+        
 
     }
     
-    console.log(nfts);
+    // console.log(nfts);
     return nfts;
 }
 
