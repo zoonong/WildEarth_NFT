@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Buy.css';
 import { useState, useEffect } from 'react';
-import { Card, Button , Nav, Navbar, Container,ListGroup} from 'react-bootstrap';
+import { Card, Button , Nav, Navbar, Container,ListGroup, modal} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Caver from "caver-js";
@@ -94,11 +94,11 @@ export default function Buy() {
                         
                     </div>
                     <div className='buytopRightInfo'>
-                        배경<br/>{att[0]}
+                        Background<br/>{att[0]}
                         <div className='buytopRightInfoLine'></div>
-                        모자<br/>{att[2]}
+                        Cap<br/>{att[2]}
                         <div className='buytopRightInfoLine'></div>
-                        목걸이<br/>{att[3]}
+                        Necklace<br/>{att[3]}
                     </div>
                     <div className='buyTopRightBuy'>
                         Price
@@ -112,7 +112,7 @@ export default function Buy() {
                             {show && <Button className='buyTopRightButton' variant="light" style={back_color} onClick={() =>{
                                 _purchaseAnimalToken(NFTinfo.state.Nid)
                             }}>
-                                구매하기
+                                BUY NOW
                             </Button>}
                         </div>
                     </div>

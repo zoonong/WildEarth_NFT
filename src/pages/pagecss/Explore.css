@@ -42,7 +42,7 @@
 }
 
 .marketBack {
-    height: 100%;
+    display: flex;
     flex-wrap: wrap;
 }
 
@@ -59,10 +59,12 @@
 }
 
 .sortBack {
+    width: 100%;
     display: flex;
     justify-content: end;
     margin-right: 15%;
 }
+
 .marketList {
     margin-top: 3%;
     display: block;
@@ -79,6 +81,7 @@
 
 .marketCardTitle{
     margin-bottom: 0rem !important;
+    width: 100px !important;
 }
 
 .marketCardPrice{

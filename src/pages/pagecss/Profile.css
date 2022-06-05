@@ -1,7 +1,3 @@
-.App {
-    text-align: center;
-    font-family: "ROKABold";
-}
 
 .profileBack {
     width: 100%;
@@ -31,12 +27,9 @@
 }
 
 .Mint_div{
-    position: fixed;
-    top: -120px;
-    width: 20%;
     height: 100%;
     padding: 10px;
-    padding-top: 600px;
+    padding-top: 500px;
 }
 
 .MintDivTitle{
@@ -45,7 +38,7 @@
 
 }
 
-.mb-3{
+.mintDiv{
     height: 200px;
     padding: 5%;
     font-size: 20px;
@@ -73,22 +66,21 @@
 .tapLine{
     margin-top: 3%;
     margin-left: 8%;
-    width: 100%;
     height: 3%;
     font-size: 50px;
 }
 
 .profileList{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+    display: block;
+    height: 100%;
     padding-right: 5%;
     padding-left: 5%;
 
 }
 
 .profileImg{
+    float: left;
+    height: 400px;
     width: 250px;
     margin-right:2%;
     margin-left:2%;
@@ -97,7 +89,13 @@
 .profileCardBody {
     height: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+.profileCardBtn{
+    display:inline !important;
+    margin-bottom: 10px;
 }
 
 .profileCard {
@@ -106,5 +104,9 @@
     margin: 0 auto;
     margin-bottom: 20%;
     box-shadow: 2px 2px 2px 2px gray;
+}
+
+.nftFooter{
+    margin-bottom: 5px !important;
 }
 

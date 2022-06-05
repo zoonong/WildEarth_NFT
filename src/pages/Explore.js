@@ -196,10 +196,9 @@ function Explore() {
                     {/* <button onClick={allnfts()}></button> */}
                 </div>
                 <div className="sortBack">
-                    <DropdownButton id="marketSort" variant='light' size='larger' title="Sort By" textAlign="right">
-                        <Dropdown.Item as="button" onClick={numberSort}>번호순</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={lowerPriceSort}>낮은가격순</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={HigherPriceSort}>높은가격순</Dropdown.Item>
+                    <DropdownButton id="marketSort" variant='light' size='larger' title="Filter By" textAlign="right">
+                        <Dropdown.Item as="button" onClick={numberSort}>All NFT</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={lowerPriceSort}>On Sale</Dropdown.Item>
                     </DropdownButton> 
                 </div>
                 <div className='marketList'>
