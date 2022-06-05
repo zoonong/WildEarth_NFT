@@ -26,6 +26,7 @@ const option = {
 const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn",option));
 const NFTContract = new caver.contract(ABI, CONTRACTADDRESS);
 
+// 준비용
 const TotalNFT = async () => {
     const total = await NFTContract.methods.totalSupply().call();
     // console.log(total);
@@ -160,6 +161,7 @@ function Explore() {
         const _nfts = await TotalNFT();
         setNfts(_nfts);
     }
+    console.log(nfts)
 
     function numberSort(){
         
@@ -200,6 +202,7 @@ function Explore() {
                     </DropdownButton> 
                 </div>
                 <div className='marketList'>
+                    {/* 준비용 */}
                     {nfts.map((nft, index) => (
                         <>
                         <Link to={`/Buy/${nfts[index].id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : nfts[index].uri, Nid : nfts[index].id, Cost : nfts[index].price}}>
