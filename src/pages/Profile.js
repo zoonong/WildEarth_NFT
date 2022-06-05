@@ -249,12 +249,25 @@ function Profile() {
 
     let accounts;
     const [nfts, setNfts] = useState([]);
+    const [isMinter,SetisMinter] = useState();
+
     const allnfts = async () => {
         const _nfts = await myNFT();
         setNfts(_nfts);
     }
-    
- 
+    async function user_certificate(){
+        caver = new Caver(window.klaytn);
+        accounts = await window.klaytn.enable();
+        account = accounts[0]
+        myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+        await myContract.methods.isMinter(account).call()
+        .then(function(result){
+            SetisMinter(result)
+        })
+    }
+    user_certificate()
+    allnfts()
 
 
     //mint function
@@ -307,7 +320,7 @@ function Profile() {
                 </div> */}
                 <br></br>
                 <br></br>
-                <div className='Mint_div'>
+                {isMinter && <div className='Mint_div'>
                     <div className='MintDivTitle'>
                         Mint New NFT
                     </div>
@@ -330,11 +343,11 @@ function Profile() {
                     }}>
                         MINT
                     </Button>
-                </div>
+                </div>}
             </div>
 
             <div className='profileRight'>
-                <div className='tapLine' style={{fontWeight:"bold",fontSize:"50px",textAlign:"left"}} onClick={allnfts()}>
+                <div className='tapLine' style={{fontWeight:"bold",fontSize:"50px",textAlign:"left"}}>
                     COLLECTED
                 </div>
                 <div className='profileList'>
