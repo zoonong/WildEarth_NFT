@@ -12,7 +12,7 @@ import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 
 // var wallet_address = account
 
-let back_color = {background:"#E0FACC"}
+let back_color = {background:"#E0FACC",width:"150px",fontSize:"18px",fontWeight:"200%"}
 let account;
 
 
@@ -81,7 +81,7 @@ function NFT_sell(props) {
             })
             .catch(function (e) {
                 console.log(e)
-                alert("Error 재접속 후 다시 시도해 주세요..")
+                alert("Error 재접속 후 다시 시도해 주세요.")
                 window.location.reload();
             })
 
@@ -299,7 +299,7 @@ function Profile() {
         <div className='profileBack'>
             <div className='profileLeft'>
                 <div className='proflieName'>
-                    마이페이지
+                    MY PAGE
                 </div>
                 {/* <div className='proflieName'>
                     {profile_name}
@@ -321,23 +321,27 @@ function Profile() {
                 <br></br>
                 <br></br>
                 {isMinter && <div className='Mint_div'>
+                    <div className='MintDivTitle'>
+                        Mint New NFT
+                    </div>
+                    
                     <Form.Group className="mb-3">
-                        <Form.Label>Wallet address</Form.Label>
-                        <Form.Control placeholder="Wallet address" id="walletAddress"/>
+                        <Form.Label className="mintLabel1">Wallet address</Form.Label>
+                        <Form.Control placeholder="Wallet_address" id="walletAddress"/>
                         <Form.Text className="text-muted">
-                            Wallet address 입력
+
                         </Form.Text>
                         <br/>
-                        <Form.Label>JSON address</Form.Label>
+                        <Form.Label className="mintLabel1">JSON address</Form.Label>
                         <Form.Control placeholder="JSON_URL" id="JSON_URL"/>
                         <Form.Text className="text-muted">
-                            Minting할 NFT JSON URL 입력
+
                         </Form.Text>
                     </Form.Group>
-                    <Button  variant="light" style={back_color} onClick={()=>{
+                    <Button  className="mintBtn" variant="light" style={back_color} onClick={()=>{
                         _mint(document.getElementById("walletAddress").value,document.getElementById("JSON_URL").value)
                     }}>
-                        Mint New NFT
+                        MINT
                     </Button>
                 </div>}
             </div>
@@ -358,47 +362,7 @@ function Profile() {
                 </div>
             </div>
         </div>
-        <div className='btmBar' fixed='bottom'>
-                <div className='btmBarTop'>
-                    <Navbar bg="#aaaaaa" variant="dark">
-                        <Container className='btmNav'>
-                        <Navbar.Brand href="/" className="navLogo">
-                            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
-                        </Navbar.Brand>
-                        <Nav className="btmTab">
-                            <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
-                            <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
-                            <Nav.Link href="/Profile" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profile</Nav.Link>
-                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
-                        </Nav>
-                        </Container>
-                    </Navbar>
-                </div>
-                <div className='btmBarMid'>
-                    <div className='btmBarMidLine'></div>
-                </div>
-                <div className='btmBarBtm'>
-                    <div class='logoCont'>
-                        <a  href = "http://dongguk.edu/main">
-                            <img src = "\img\dongguk_logo.png" width = '234' height= '76'  textAlign = 'center'></img>
-                        </a>
-                    </div>
-                    <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
-                        gitHub <br/>
-                        <div className='gitAdd' >
-                            <div className='gitAddLeft' style={{marginRight:"7%"}}>
-                                github.com/banghyun <br/>
-                                github.com/Heejun <br/>
-                                github.com/zoonong <br/>
-                            </div>
-                            <div className='gitAddRight'>
-                                github.com/suhwan <br/>
-                                github.com/ssangjun <br/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         </>
     );
 }

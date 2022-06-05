@@ -122,12 +122,13 @@ function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){
             <Card className='marketCard'>
                 <Card.Img variant="bottom" src={NFT_url} />
                 <Card.Body className='marketCardBody'>
-                    <Card.Text style={{fontWeight:"bold",fontSize:"30px",textAlign:"left"}}>
+                    <Card.Text className='marketCardTitle' style={{fontWeight:"bold",fontSize:"30px",textAlign:"left"}}>
                         {NFT_name}
                         <br/>
                         #{NFT_number}
                     </Card.Text>
-                    {show && <Card.Text style={{fontWeight:"",fontSize:"20px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
+                    {show && 
+                    <Card.Text className='marketCardPrice'style={{fontWeight:"",fontSize:"20px",textAlign:"right",marginLeft:"30%",marginTop:"7%"}}>
                         PRICE 
                         <br/>
                         {cost} KLAY
@@ -205,7 +206,7 @@ function Explore() {
                     {/* 준비용 */}
                     {nfts.map((nft, index) => (
                         <>
-                        <Link to={`/Buy/${nfts[index].id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : nfts[index].uri, Nid : nfts[index].id, Cost : nfts[index].price}}>
+                        <Link className='nftLink' to={`/Buy/${nfts[index].id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : nfts[index].uri, Nid : nfts[index].id, Cost : nfts[index].price}}>
                             <NFTList NFT_url={nfts[index].image} NFT_number={nfts[index].id} NFT_name={nfts[index].name} NFT_price={nfts[index].price}/>
                         </Link>
                         {/* <p>{nfts[index].image}</p> */}
@@ -214,48 +215,8 @@ function Explore() {
                     )}
                 </div>
             </div>
-            <div className='btmBar' fixed='bottom'>
-                <div className='btmBarTop'>
-                    <Navbar bg="#aaaaaa" variant="dark">
-                        <Container className='btmNav'>
-                        <Navbar.Brand href="/" className="navLogo">
-                            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
-                        </Navbar.Brand>
-                        <Nav className="btmTab">
-                            <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
-                            <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
-                            <Nav.Link href="/Profile" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profile</Nav.Link>
-                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
-                        </Nav>
-                        </Container>
-                    </Navbar>
-                </div>
-                <div className='btmBarMid'>
-                    <div className='btmBarMidLine'></div>
-                </div>
-                <div className='btmBarBtm'>
-                    <div class='logoCont'>
-                        <a  href = "http://dongguk.edu/main">
-                            <img src = "\img\dongguk_logo.png" width = '234' height= '76'  textAlign = 'center'></img>
-                        </a>
-                    </div>
-                    <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
-                        gitHub <br/>
-                        <div className='gitAdd' >
-                            <div className='gitAddLeft' style={{marginRight:"7%"}}>
-                                github.com/banghyun <br/>
-                                github.com/Heejun <br/>
-                                github.com/zoonong <br/>
-                            </div>
-                            <div className='gitAddRight'>
-                                github.com/suhwan <br/>
-                                github.com/ssangjun <br/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+        
         </>
     );
 }
