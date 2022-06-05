@@ -116,7 +116,7 @@ function NFT_sell(props) {
     if(sellstate==0){
         return(
          <div>
-            <Form.Group className="mb-3">
+            <Form.Group className="nftFooter">
                 <Form.Control placeholder="COST(KLAY)" id="cost" type="number"/>
             </Form.Group>
             <Button  variant="light" style={back_color} onClick={() => {
@@ -227,7 +227,7 @@ function NFTList({NFT_name, NFT_url, NFT_number,NFT_price}){
                 <Card.Body className='profileCardBody' onClick={()=>{setshow(!show);}}>
                     <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
                         #{NFT_number} : {NFT_name}
-                        {sellstate && <Badge bg="warning" text="dark" style={{marginLeft : "10px"}}>판매 중!</Badge> }
+                        {sellstate && <Badge className='profileCardBtn' bg="warning" text="dark" style={{marginLeft : "10px"}}>ON SALE</Badge> }
                         <br/>
                     </Card.Text>
                 </Card.Body>
@@ -325,7 +325,7 @@ function Profile() {
                         Mint New NFT
                     </div>
                     
-                    <Form.Group className="mb-3">
+                    <Form.Group className="mintDiv">
                         <Form.Label className="mintLabel1">Wallet address</Form.Label>
                         <Form.Control placeholder="Wallet_address" id="walletAddress"/>
                         <Form.Text className="text-muted">
