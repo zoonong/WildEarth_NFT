@@ -6,7 +6,7 @@
 .rankingBack {
     margin-top: 5%;
     border: 2px solid #E0FACC;
-    background-color: #F8FDF8;
+    background-color: #E0FACC;
 }
 .rankingList {
     width: 100%;
@@ -39,7 +39,6 @@
 .rankingImg{
     margin-left:2.5%;
     margin-right:2.5%;
-    align-items: center;
 }
 
 .marketBack {
@@ -58,6 +57,7 @@
     align-content: flex-start;
     font-size: 70px;
 }
+
 .sortBack {
     display: flex;
     justify-content: end;
@@ -65,22 +65,40 @@
 }
 .marketList {
     margin-top: 3%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
+    display: block;
+    margin-left: 10%;
 }
 
 .marketCardBody {
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    padding:1rem !important;
+    padding-left: 3rem !important;
+}
+
+.marketCardTitle{
+    margin-bottom: 0rem !important;
+}
+
+.marketCardPrice{
+    margin-top: 25px !important;
 }
 
 .marketCard {
     align-content: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 20%;
     box-shadow: 3px 3px 3px 3px gray;
+}
+
+.marketImg{
+    width: 350px;
+}
+
+.nftLink{
+    margin:2%;
+    height: 472px;
+    float: left;
 }

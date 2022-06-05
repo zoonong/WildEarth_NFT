@@ -83,7 +83,49 @@ function App() {
         </ScrollToTop>
       </BrowserRouter>
        
+      <div className='btmBar' fixed='bottom'>
+                <div className='btmBarTop'>
+                    <Navbar bg="#aaaaaa" variant="dark">
+                        <Container className='btmNav'>
+                        <Navbar.Brand href="/" className="navLogo">
+                            <img src = "\img\logo_cap.png" alt={logo} width = '160' height= '72' marginRight = '20px' textAlign = 'center'/>
+                        </Navbar.Brand>
+                        <Nav className="btmTab">
+                            <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
+                            <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
+                            <Nav.Link href="/Profile" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profile</Nav.Link>
+                            <Nav.Link  style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
+                        </Nav>
+                        </Container>
+                    </Navbar>
+                </div>
+                <div className='btmBarMid'>
+                    <div className='btmBarMidLine'></div>
+                </div>
+                <div className='btmBarBtm'>
+                    <div class='logoCont'>
+                        <a  href = "http://dongguk.edu/main">
+                            <img src = "\img\dongguk_logo.png" width = '234' height= '76'  textAlign = 'center'></img>
+                        </a>
+                    </div>
+                    <div className='git' style={{textAlign:"left",fontWeight:"bold",fontSize:"24px",color:"#393939"}}>
+                        gitHub <br/>
+                        <div className='gitAdd' >
+                            <div className='gitAddLeft' style={{marginRight:"7%"}}>
+                                github.com/banghyun <br/>
+                                github.com/Heejun <br/>
+                                github.com/zoonong <br/>
+                            </div>
+                            <div className='gitAddRight'>
+                                github.com/suhwan <br/>
+                                github.com/ssangjun <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
+    
   );
 }
 export default App;
