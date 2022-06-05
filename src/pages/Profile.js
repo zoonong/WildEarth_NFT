@@ -69,13 +69,13 @@ function NFT_sell(props) {
         let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
         let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console(animalTokenPrices)
+        // console.log(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
 
         await myContract.methods.setForSaleAnimalToken(NFT_number,cost).send({from: account, gas: 3000000})
             .then(function() {
-                console(animalTokenPrices)
+                console.log(animalTokenPrices)
                 alert("판매등록이 완료 되었습니다.")
                 window.location.reload();
             })
@@ -95,7 +95,7 @@ function NFT_sell(props) {
         let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
 
         let animalTokenPrices = await myContract.methods.animalTokenPrices(NFT_number).call();
-        console.log(animalTokenPrices)
+        // console.log(animalTokenPrices)
 
         myContract.options.address=CONTRACTADDRESS
 
@@ -140,66 +140,93 @@ function NFT_sell(props) {
    
 };
 
-async function GetInfo(jsonAddress){
-    let Data = await axios.get(jsonAddress);
-    let str = JSON.stringify(Data);
-    let jsonArray = await JSON.parse(str);
-    let res = jsonArray.data
-    return res;
+
+const myNFT = async () => {
+    caver = new Caver(window.klaytn);
+    let accounts = await window.klaytn.enable();
+    account = accounts[0]
+    let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
+
+    var tokenIDs = []
+    var animalName = []
+    var tokenURIs = []
+    var tokenimg = []
+    var nftprice = []
+    var nfts = []
+    var index = 0
+    var my_last = 0
+    await myContract.methods.balanceOf(account).call()
+    .then(function(result){
+        my_last = result;
+    });
+
+
+    while(index<my_last){
+        await myContract.methods.tokenOfOwnerByIndex(account,index).call() // 본인 소유 NFT 확인
+        .then(function(result) {
+            tokenIDs.push(result);
+            index +=1;
+        }) 
+        .catch(function (error) {
+            console.log(error); 
+        });
+    }
+
+    for (var i = 0; i<tokenIDs.length; i++){
+        // NFT 가격
+        const nftPrice = await myContract.methods.animalTokenPrices(tokenIDs[i]).call();
+        nftprice.push(nftPrice);
+        // NFT 이미지
+        const nftImg = await myContract.methods.tokenURI(tokenIDs[i]).call();
+        fetch(nftImg)
+        .then(res => res.json())
+        .then((out) => {
+            tokenimg.push(out.image)
+        })
+        // NFT 이름
+        const nftNm = await myContract.methods.tokenURI(tokenIDs[i]).call();
+        fetch(nftNm)
+        .then(res => res.json())
+        .then((out) => {
+            animalName.push(out.attributes[1].value)
+        })
+        // NFT JSON URI
+        const nftURI = await myContract.methods.tokenURI(tokenIDs[i]).call();
+        tokenURIs.push(nftURI);
+
+        nfts.push({id : tokenIDs[i], uri: tokenURIs[i], image: tokenimg[i], name: animalName[i], price: nftprice[i]});
+        
+
+    }
+    
+    // console.log(nfts);
+    return nfts;
 }
 
 
-function ShowNFT({NFT_url,NFT_number}){
+
+function NFTList({NFT_name, NFT_url, NFT_number,NFT_price}){
     let [show,setshow] = useState(false);
-    let [data,setData] = useState(null);
-    let [att, setAtt] = useState(null);
-
-    useEffect(()=>{
-        const info = async()=>{
-            const arr = await GetInfo(NFT_url);
-            setData(arr);
-            const arr1 = Object.values(arr.attributes);
-            setAtt(arr1[1].value);
-        }
-        info();
-    },[]);
-
     let [sellstate, setSellstate] = useState(null);
-    let [NFTPrice, setPrice] = useState(null);
+
 
     useEffect(()=>{
-        async function check_sellstate(){
-            caver = new Caver(window.klaytn);
-            let accounts = await window.klaytn.enable();
-            account = accounts[0]
-            let myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
-
-            let result = await myContract.methods.animalTokenPrices(NFT_number).call()
-            setPrice(result);
-        };
-        check_sellstate();
-    },[]);
-
-    useEffect(()=>{
-        if(!NFTPrice){
+        if(!NFT_price){
             setSellstate(null);
-        }else if(NFTPrice == 0){
+        }else if(NFT_price == 0){
             setSellstate(false);
         }else{
             setSellstate(true);
         }
-    },[NFTPrice]);
+    },[NFT_price]);
 
-    if(!data || !att){
-        return null;
-    }
     return(
         <div className='profileImg'>
             <Card className='profileCard'>
-                <Card.Img variant="bottom" src={data.image}  onClick={()=>{setshow(!show);}} />
+                <Card.Img variant="bottom" src={NFT_url}  onClick={()=>{setshow(!show);}} />
                 <Card.Body className='profileCardBody' onClick={()=>{setshow(!show);}}>
                     <Card.Text style={{fontWeight:"bold",fontSize:"20px",textAlign:"left"}}>
-                        #{NFT_number} : {att}
+                        #{NFT_number} : {NFT_name}
                         {sellstate && <Badge bg="warning" text="dark" style={{marginLeft : "10px"}}>판매 중!</Badge> }
                         <br/>
                     </Card.Text>
@@ -211,17 +238,24 @@ function ShowNFT({NFT_url,NFT_number}){
         </div>
     );
 
-};
+
+
+    
+}
 
 
 function Profile() {
-
-    // let [myToken,setToken] = useState([]);
-    // let [myTokenURI,setTokenURI] = useState([]);
-    let [TokenObject,setToken_Object] = useState([]);
     let myContract;
 
     let accounts;
+    const [nfts, setNfts] = useState([]);
+    const allnfts = async () => {
+        const _nfts = await myNFT();
+        setNfts(_nfts);
+    }
+    
+ 
+
 
     //mint function
     async function _mint(walletAddress, jsonAddress){
@@ -229,7 +263,7 @@ function Profile() {
         accounts = await window.klaytn.enable();
         account = accounts[0]
         myContract = new caver.klay.Contract(ABI,CONTRACTADDRESS,{from : account})
-        console.log(myContract)
+
 
         myContract.options.address=CONTRACTADDRESS
         await myContract.methods.airDropMint(walletAddress, jsonAddress).send({from: account, gas: 3000000})
@@ -242,75 +276,10 @@ function Profile() {
                     window.location.reload();
             })
 
-        const totalSupply = await myContract.methods.totalSupply().call();
-        console.log(totalSupply)
+        // const totalSupply = await myContract.methods.totalSupply().call();
+
     }
     
-    async function check_wallet(){
-
-        accounts = await window.klaytn.enable();
-        account = accounts[0];
-        myContract = new caver.contract(ABI, CONTRACTADDRESS);
-
-        // 소유권 확인
-        let index = 0;
-        let last = 0;
-        let token_temp = [];
-        let token_object = [];
-
-        await myContract.methods.balanceOf(account).call() // 본인 소유 NFT 개수 확인
-            .then(function(result){
-                last = result;
-            });
-
-        while(index<last){
-            await myContract.methods.tokenOfOwnerByIndex(account,index).call() // 본인 소유 NFT 확인
-            .then(function(result) {
-                token_temp.push(result);
-                index +=1;
-            }) 
-            .catch(function (error) {
-                console.log(error); 
-            });
-        }
-        
-        
-        for (var i of token_temp){
-            var token_one = new Object();
-            await myContract.methods.tokenURI(i).call()
-            .then(function(result){
-                
-                token_one['T_ID'] = i;
-                token_one['T_URI'] = result;
-                
-            });
-            await myContract.methods.animalTokenPrices(i).call()
-            .then(function(result){
-                token_one['T_Price'] = result;
-                token_object.push(token_one);
-            });
-
-            
-        }
-        setToken_Object(token_object);
-        // setToken(token_temp);
-        // setTokenURI(tokenURI_temp);
-        // console.log(TokenObject);
-
-        
-    }
-
-    check_wallet();
- 
-    
-    // console.log(myToken);
-    // console.log(myTokenURI);
-    
-
-
-
-    const Information = TokenObject;
-    // console.log(Information);
 
     return (
         <>
@@ -361,13 +330,18 @@ function Profile() {
             </div>
 
             <div className='profileRight'>
-                <div className='tapLine' style={{fontWeight:"bold",fontSize:"50px",textAlign:"left"}}>
+                <div className='tapLine' style={{fontWeight:"bold",fontSize:"50px",textAlign:"left"}} onClick={allnfts()}>
                     COLLECTED
                 </div>
                 <div className='profileList'>
-                    {Information.map(NFT=>(
-                        <ShowNFT NFT_url={NFT.T_URI} NFT_number={NFT.T_ID}/>
-                    ))}
+                    <>
+                    {nfts.map((nft, index) => (
+                        <NFTList NFT_url = {nfts[index].image} NFT_number = {nfts[index].id} NFT_name = {nfts[index].name} NFT_price = {nfts[index].price}/>
+
+                    )
+                    )}
+                    </>
+    
                 </div>
             </div>
         </div>
