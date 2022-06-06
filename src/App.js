@@ -96,7 +96,8 @@ function App() {
                         <Nav className="btmTab">
                             <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
                             <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
-                            <Nav.Link  id="btmConnectButton" onClick={connect} style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
+                            <Nav.Link href="/Profile" id='btmProfileLink' disabled style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profle</Nav.Link>
+                            <Nav.Link  id="btmConnectButton"  onClick={connect} style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
                         </Nav>
                         </Container>
                     </Navbar>
@@ -114,12 +115,12 @@ function App() {
                         gitHub <br/>
                         <div className='gitAdd' >
                             <div className='gitAddLeft' style={{marginRight:"7%"}}>
-                                github.com/banghyun <br/>
-                                github.com/Heejun <br/>
+                                github.com/chesthyeon <br/>
+                                github.com/Shj-A <br/>
                                 github.com/zoonong <br/>
                             </div>
                             <div className='gitAddRight'>
-                                github.com/suhwan <br/>
+                                github.com/Dennis12ax <br/>
                                 github.com/ssangjun <br/>
                             </div>
                         </div>
@@ -173,6 +174,7 @@ function App() {
                             <Nav.Link href="/Animal" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Animal</Nav.Link>
                             <Nav.Link href="/Explore" style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Explore</Nav.Link>
                             <Nav.Link href="/Profile" id='btmProfileLink' style={{color:"#393939", fontWeight:"bold", marginRight:"20%"}}>Profle</Nav.Link>
+                            <Nav.Link id="btmConnectButton" disabled onClick={connect} style={{color:"#393939", fontWeight:"bold", marginRight:"50%"}}>Connect</Nav.Link>
                         </Nav>
                         </Container>
                     </Navbar>
@@ -190,12 +192,12 @@ function App() {
                         gitHub <br/>
                         <div className='gitAdd' >
                             <div className='gitAddLeft' style={{marginRight:"7%"}}>
-                                github.com/banghyun <br/>
-                                github.com/Heejun <br/>
+                                github.com/chesthyeon <br/>
+                                github.com/Shj-A <br/>
                                 github.com/zoonong <br/>
                             </div>
                             <div className='gitAddRight'>
-                                github.com/suhwan <br/>
+                                github.com/Dennis12ax <br/>
                                 github.com/ssangjun <br/>
                             </div>
                         </div>
