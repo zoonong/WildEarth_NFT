@@ -33,7 +33,7 @@ async function _purchaseAnimalToken(tokenID){
     await myContract.methods.purchaseAnimalToken(tokenID).send({from: account, gas: 3000000, value: caver.utils.convertToPeb(_value, 'KLAY')})
         .then(function() {
             alert("구매가 완료 되었습니다..")
-            window.location.reload();
+            window.location.href="/Profile";
         })
         .catch(function (error) {
             console.log(error)
