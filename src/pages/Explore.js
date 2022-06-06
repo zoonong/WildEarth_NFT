@@ -162,7 +162,6 @@ function Explore() {
         const _nfts = await TotalNFT();
         setNfts(_nfts);
     }
-    console.log(nfts)
 
     function numberSort(){
         
