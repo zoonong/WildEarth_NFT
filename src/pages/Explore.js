@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import logo from '../logo.svg';
 
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
-
 import './/pagecss/Explore.css';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 import Caver from 'caver-js';
@@ -73,38 +72,48 @@ const TotalNFT = async () => {
     return nfts;
 }
 
-const RankItem = [
-    {
-        NAME: "수리부엉이",
-        URL_: "\\img\\owl.png",
-        Num_: "2",
-        Price : 150
-    },
-    {
-        NAME: "하프물범",
-        URL_: "\\img\\seal.png",
-        Num_: "3",
-        Price : 10
-    },
-    {
-        NAME: "반달가슴곰",
-        URL_: "\\img\\bear.png",
-        Num_: "4",
-        Price : 15
-    },
-    {
-        NAME: "수리부엉이",
-        URL_: "\\img\\owl.png",
-        Num_: "5",
-        Price : 1000
-    },
-    {
-        NAME: "하프물범",
-        URL_: "\\img\\seal.png",
-        Num_: "6",
-        Price : 50
-    }   
-]
+
+async function RandomNft(nfts){
+    var RankItem = []
+    for (var i = 0; i<5; i++){
+        const random = Math.floor(Math.random * nfts.length);
+        RankItem.push(nfts[random])
+    }
+    return RankItem;
+}
+
+// const RankItem = [
+//     {
+//         NAME: "수리부엉이",
+//         URL_: "\\img\\owl.png",
+//         Num_: "2",
+//         Price : 150
+//     },
+//     {
+//         NAME: "하프물범",
+//         URL_: "\\img\\seal.png",
+//         Num_: "3",
+//         Price : 10
+//     },
+//     {
+//         NAME: "반달가슴곰",
+//         URL_: "\\img\\bear.png",
+//         Num_: "4",
+//         Price : 15
+//     },
+//     {
+//         NAME: "수리부엉이",
+//         URL_: "\\img\\owl.png",
+//         Num_: "5",
+//         Price : 1000
+//     },
+//     {
+//         NAME: "하프물범",
+//         URL_: "\\img\\seal.png",
+//         Num_: "6",
+//         Price : 50
+//     }   
+// ]
 
 
 function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){ 
@@ -157,15 +166,42 @@ function Ranking({NFT_name,NFT_url}){
 
 function Explore() {
     const [nfts, setNfts] = useState([]);
-
+    const [RankItem, setRandomNfts] = useState([]);
     const allnfts = async () => {
         const _nfts = await TotalNFT();
         setNfts(_nfts);
     }
+    console.log(nfts);
+    // useEffect(()=>{
+    //     const rand = async(nfts)=>{
+    //         const _RankItem = await RandomNft(nfts);
+    //         setRandomNfts(_RankItem);
+    //         console.log(_RankItem);
+    //     }
+    //     rand();
+    // },[]);
 
-    function numberSort(){
-        
+    // if(!nfts){
+    //     return null;
+    // }
+
+    function onSale(){
+        for (var i = 0; i<nfts.length; i++){
+            if(nfts[i].price==0){
+                nfts.splice(i,1);
+                i--;
+            }
+        }
+        console.log(nfts);
+        return nfts;
     }
+
+    const onSalenfts = async () => {
+        const _nfts = onSale();
+        setNfts(_nfts);
+    }
+
+
     function lowerPriceSort(){
         
     }
@@ -178,7 +214,7 @@ function Explore() {
         <div className='exploreBack'>
             <div className='rankingBack'>
                 <div className='rankingTxt' style={{textAlign:"left",fontWeight:"bold"}}>
-                    RANKING
+                    RECOMMENDATION
                 </div>
 
                 <div className='rankingList'>
@@ -190,14 +226,13 @@ function Explore() {
                 </div>
             </div>
             <div className='marketBack'>
-                <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}} onClick={allnfts()}>
+                <div className='marketTxt' style={{textAlign:"left",fontWeight:"bold"}}>
                     MARKET
-                    {/* <button onClick={allnfts()}></button> */}
                 </div>
                 <div className="sortBack">
                     <DropdownButton id="marketSort" variant='light' size='larger' title="Filter By" textAlign="right">
-                        <Dropdown.Item as="button" onClick={numberSort}>All NFT</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={lowerPriceSort}>On Sale</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={allnfts}>All NFT</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={onSalenfts}>On Sale</Dropdown.Item>
                     </DropdownButton> 
                 </div>
                 <div className='marketList'>
@@ -207,7 +242,7 @@ function Explore() {
                         <Link className='nftLink' to={`/Buy/${nfts[index].id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : nfts[index].uri, Nid : nfts[index].id, Cost : nfts[index].price}}>
                             <NFTList NFT_url={nfts[index].image} NFT_number={nfts[index].id} NFT_name={nfts[index].name} NFT_price={nfts[index].price}/>
                         </Link>
-                        {/* <p>{nfts[index].image}</p> */}
+
                         </>
                     )
                     )}
