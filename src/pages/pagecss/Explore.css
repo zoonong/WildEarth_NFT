@@ -80,6 +80,17 @@
     padding-left: 3rem !important;
 }
 
+.RankingCardBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.RankingCardtext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .marketCardTitle{
     margin-bottom: 0rem !important;
     width: 100px !important;

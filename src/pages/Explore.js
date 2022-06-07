@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect,} from 'react';
 import React from 'react';
 import logo from '../logo.svg';
 
-import { Carousel,Navbar,Container, Nav, NavDropdown, Card,DropdownButton, Dropdown } from 'react-bootstrap';
-import { BrowserRouter, Route, Routes, Link, useNavigate} from 'react-router-dom';
+import { Card,DropdownButton, Dropdown, Spinner, Badge } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import './/pagecss/Explore.css';
 import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 import Caver from 'caver-js';
@@ -72,59 +72,16 @@ const TotalNFT = async () => {
     return nfts;
 }
 
-
-async function RandomNft(nfts){
-    var RankItem = []
-    for (var i = 0; i<5; i++){
-        const random = Math.floor(Math.random * nfts.length);
-        RankItem.push(nfts[random])
-    }
-    return RankItem;
-}
-
-// const RankItem = [
-//     {
-//         NAME: "수리부엉이",
-//         URL_: "\\img\\owl.png",
-//         Num_: "2",
-//         Price : 150
-//     },
-//     {
-//         NAME: "하프물범",
-//         URL_: "\\img\\seal.png",
-//         Num_: "3",
-//         Price : 10
-//     },
-//     {
-//         NAME: "반달가슴곰",
-//         URL_: "\\img\\bear.png",
-//         Num_: "4",
-//         Price : 15
-//     },
-//     {
-//         NAME: "수리부엉이",
-//         URL_: "\\img\\owl.png",
-//         Num_: "5",
-//         Price : 1000
-//     },
-//     {
-//         NAME: "하프물범",
-//         URL_: "\\img\\seal.png",
-//         Num_: "6",
-//         Price : 50
-//     }   
-// ]
-
-
 function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){ 
     let cost = NFT_price/(10**18);
     let [show, setShow] = useState(true);
-
     useEffect(()=>{
-        if (cost == 0){
+        if (cost != 0){
+            setShow(true);
+        }else{
             setShow(false);
         }
-    },[]);
+    });
 
     return(
         <div className='marketImg'>
@@ -148,15 +105,25 @@ function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){
     );
 };
 
-function Ranking({NFT_name,NFT_url}){
-
+function Ranking({NFT_name,NFT_url, NFT_price}){
+    let cost = NFT_price/(10**18);
+    let [show, setShow] = useState(true);
+    useEffect(()=>{
+        if (cost != 0){
+            setShow(true);
+        }else{
+            setShow(false);
+        }
+    });
+    
     return(
         <div className='rankingImg'>
             <Card className='rankingCard'>
                 <Card.Img variant="bottom" src={NFT_url}/>
-                <Card.Body className='marketCardBody'>
-                    <Card.Text style={{fontWeight:"bold"}}>
-                        {NFT_name}          
+                <Card.Body className='RankingCardBody'>
+                    <Card.Text className='RankingCardtext'>
+                        <h3 style={{display:"inline"}}>{NFT_name}</h3>
+                        {show && <h6 style={{display:"inline", marginLeft:"10px"}}><Badge bg="warning" text="dark">ON SALE</Badge></h6>}
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -165,52 +132,86 @@ function Ranking({NFT_name,NFT_url}){
 };
 
 function Explore() {
-    const [nfts, setNfts] = useState([]);
-    const [RankItem, setRandomNfts] = useState([]);
+    const [nfts, setNfts] = useState(null);
+    const [RankItem, setRandomNfts] = useState(null);
+
     const allnfts = async () => {
         const _nfts = await TotalNFT();
         setNfts(_nfts);
-    }
-    console.log(nfts);
-    // useEffect(()=>{
-    //     const rand = async(nfts)=>{
-    //         const _RankItem = await RandomNft(nfts);
-    //         setRandomNfts(_RankItem);
-    //         console.log(_RankItem);
-    //     }
-    //     rand();
-    // },[]);
+    };
 
-    // if(!nfts){
-    //     return null;
-    // }
+    
+    useEffect(() =>{
+        console.log(1);
+        const startnfts = async () => {
+            const _nfts = await TotalNFT();
+            setNfts(_nfts);
+        };
+        startnfts();
+    },[]);
+
+    useEffect(()=>{
+        async function RandomNft(){
+            var RecommandItem = [];
+            var base = await TotalNFT();
+            for (var i = 0; i<5; i++){
+                const random_num = Math.floor(Math.random() * base.length);
+                RecommandItem.push(base[random_num]);
+            };
+            setRandomNfts(RecommandItem);
+        };
+        RandomNft();
+    },[]);
 
     function onSale(){
-        for (var i = 0; i<nfts.length; i++){
-            if(nfts[i].price==0){
-                nfts.splice(i,1);
+        let copy = [... nfts];
+        console.log(copy);
+        for (var i = 0; i<copy.length; i++){
+            if(copy[i].price==0){
+                copy.splice(i,1);
                 i--;
             }
-        }
-        console.log(nfts);
-        return nfts;
-    }
+        };
+        setNfts(copy);
+    };
 
-    const onSalenfts = async () => {
-        const _nfts = onSale();
-        setNfts(_nfts);
-    }
+    console.log(RankItem);
+    if(!nfts || !RankItem) {
+        return (
+            <>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+              <Spinner animation="border" variant="success"/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            </>
+        );
 
-
-    function lowerPriceSort(){
-        
-    }
-    function HigherPriceSort(){
-        
-    }
-
-    return (
-        <>
+    }else{
+         return (
+         <>
         <div className='exploreBack'>
             <div className='rankingBack'>
                 <div className='rankingTxt' style={{textAlign:"left",fontWeight:"bold"}}>
@@ -219,8 +220,8 @@ function Explore() {
 
                 <div className='rankingList'>
                     {RankItem.map(item=>(
-                    <Link to={`/Buy/${item.Num_}`} style={{textDecoration: 'none', color:'black'}} state={{Nname : item.NAME, Src : item.URL_, Cost : item.Price, Nid : item.Num_}}>
-                        <Ranking NFT_name={item.NAME} NFT_url={item.URL_}/>
+                    <Link to={`/Buy/${item.id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : item.uri, Cost : item.price, Nid : item.id}}>
+                        <Ranking NFT_name={item.name} NFT_url={item.image} NFT_price={item.price}/>
                     </Link>
                     ))}
                 </div>
@@ -232,7 +233,7 @@ function Explore() {
                 <div className="sortBack">
                     <DropdownButton id="marketSort" variant='light' size='larger' title="Filter By" textAlign="right">
                         <Dropdown.Item as="button" onClick={allnfts}>All NFT</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={onSalenfts}>On Sale</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={onSale}>On Sale</Dropdown.Item>
                     </DropdownButton> 
                 </div>
                 <div className='marketList'>
@@ -252,6 +253,7 @@ function Explore() {
         
         </>
     );
+    }; 
 }
 
 export default Explore;
