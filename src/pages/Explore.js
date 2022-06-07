@@ -105,7 +105,7 @@ function NFTList({NFT_name,NFT_url,NFT_number,NFT_price}){
     );
 };
 
-function Ranking({NFT_name,NFT_url, NFT_price}){
+function Ranking({NFT_name,NFT_url, NFT_price, NFT_number}){
     let cost = NFT_price/(10**18);
     let [show, setShow] = useState(true);
     useEffect(()=>{
@@ -122,8 +122,8 @@ function Ranking({NFT_name,NFT_url, NFT_price}){
                 <Card.Img variant="bottom" src={NFT_url}/>
                 <Card.Body className='RankingCardBody'>
                     <Card.Text className='RankingCardtext'>
-                        <h3 style={{display:"inline"}}>{NFT_name}</h3>
-                        {show && <h6 style={{display:"inline", marginLeft:"10px"}}><Badge bg="warning" text="dark">ON SALE</Badge></h6>}
+                        <h3 className='RankingCardLeft' style={{display:"inline"}}>{NFT_name} #{NFT_number}</h3>
+                        {show && <h6 className='RankingCardRight' style={{display:"inline", marginLeft:"10px"}}><Badge className='RankingCardBadge' bg="warning" text="dark" width="30px">ON SALE</Badge></h6>}
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -179,33 +179,9 @@ function Explore() {
     if(!nfts || !RankItem) {
         return (
             <>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-              <Spinner animation="border" variant="success"/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <div className='exploreSpinnerBack'>
+               <Spinner animation="border" variant="success"/>
+            </div>
             </>
         );
 
@@ -221,7 +197,7 @@ function Explore() {
                 <div className='rankingList'>
                     {RankItem.map(item=>(
                     <Link to={`/Buy/${item.id}`} style={{textDecoration: 'none', color:'black'}} state={{jsonAddress : item.uri, Cost : item.price, Nid : item.id}}>
-                        <Ranking NFT_name={item.name} NFT_url={item.image} NFT_price={item.price}/>
+                        <Ranking NFT_name={item.name} NFT_url={item.image} NFT_price={item.price} NFT_number={item.id}/>
                     </Link>
                     ))}
                 </div>
