@@ -2,7 +2,7 @@ import { useState } from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Homepage.css';
 import React from 'react';
-import { NavLink,BrowserRouter, Route, Routes } from 'react-router-dom';
+import { NavLink,BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { Carousel,Navbar,Container, Nav, NavDropdown, Card ,Button, ButtonGroup} from 'react-bootstrap';
 import Buy from './Buy';
 
@@ -48,49 +48,54 @@ function Homepage() {
         </div>
         <br></br>
         <div className='homepageFindNFT'>
-            새로운 NFT 보러가기
+            NFT 보러가기
         </div>
         
         <br></br>    
         <div className="homepageFrameBottom">
                 <div className='home_nft_card'>
-                    <Card>
-                        <Card.Img variant="bottom" src={img_src[1]} />
-                        <Card.Body>
-                        </Card.Body>
-                    </Card>
+                    <Link to="/Explore">
+                        <Card>
+                            <Card.Img variant="bottom" src="\img\6.png" />
+                        
+                        </Card>
+                    </Link>
                 </div>
 
                 <div className='home_nft_card'>
-                    <Card>
-                        <Card.Img variant="bottom" src={img_src[1]} />
-                        <Card.Body>
-                        </Card.Body>
-                    </Card>
+                    <Link to="/Explore">
+                        <Card>
+                            <Card.Img variant="bottom" src="\img\57.png" />
+                        
+                        </Card>
+                    </Link>
                 </div>
 
                 <div className='home_nft_card'>
-                    <Card>
-                        <Card.Img variant="bottom" src={img_src[1]} />
-                        <Card.Body>
-                        </Card.Body>
-                    </Card>
+                    <Link to="/Explore">
+                        <Card>
+                            <Card.Img variant="bottom" src="\img\97.png" />
+                        
+                        </Card>
+                    </Link>
                 </div>
 
                 <div className='home_nft_card'>
-                    <Card>
-                        <Card.Img variant="bottom" src={img_src[1]} />
-                        <Card.Body>
-                        </Card.Body>
-                    </Card>
+                    <Link to="/Explore">
+                        <Card>
+                            <Card.Img variant="bottom" src="\img\70.png" />
+                        
+                        </Card>
+                    </Link>
                 </div>
 
                 <div className='home_nft_card'>
-                    <Card>
-                        <Card.Img variant="bottom" src={img_src[1]} />
-                        <Card.Body>
-                        </Card.Body>
-                    </Card>
+                    <Link to="/Explore">
+                        <Card>
+                            <Card.Img variant="bottom" src="\img\25.png" />
+                        
+                        </Card>
+                    </Link>
                 </div>
             </div>
 
