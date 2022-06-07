@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from '../logo.svg';
 import './/pagecss/Buy.css';
 import { useState, useEffect } from 'react';
-import { Card, Button , Nav, Navbar, Container,ListGroup, modal} from 'react-bootstrap';
+import { Card, Button , Spinner} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Caver from "caver-js";
@@ -73,7 +72,29 @@ export default function Buy() {
     },[]);
 
     if(!data || !att){
-        return null;
+        return(
+            <>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+              <Spinner animation="border" variant="success" />
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            </>
+        );
     }
 
     return(

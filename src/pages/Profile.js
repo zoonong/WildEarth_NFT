@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../logo.svg';
 import './/pagecss/Profile.css';
 import { useState, useEffect, useRef } from 'react';
-import { Card, Button , Nav, Navbar, Container,Form, Badge} from 'react-bootstrap';
+import { Card, Button , Spinner,Form, Badge} from 'react-bootstrap';
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 import {CONTRACTADDRESS, ABI} from '../config';
@@ -266,8 +266,8 @@ function Profile() {
             SetisMinter(result)
         })
     }
-    user_certificate()
-    allnfts()
+    user_certificate();
+    allnfts();
 
 
     //mint function
@@ -288,9 +288,6 @@ function Profile() {
                 alert("관리자가 아닙니다.")
                     window.location.reload();
             })
-
-        // const totalSupply = await myContract.methods.totalSupply().call();
-
     }
     
 
@@ -301,23 +298,6 @@ function Profile() {
                 <div className='proflieName'>
                     MY PAGE
                 </div>
-                {/* <div className='proflieName'>
-                    {profile_name}
-                </div>
-                <div className='profileNo'>
-                    #{profile_no}
-                </div>
-                <div className='wallet'>
-                    <h2>
-                        WALLET ADDRESS
-                    </h2>
-                </div> */}
-                {/* <div className='walletAddress'>
-                    <p>
-                        {account}
-                    </p>
-                    
-                </div> */}
                 <br></br>
                 <br></br>
                 {isMinter && <div className='Mint_div'>
