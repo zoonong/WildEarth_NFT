@@ -1,7 +1,15 @@
+.exploreSpinnerBack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 804px;
+}
+
 .exploreBack {
     height:100%;
     font-family: 'Do Hyeon', sans-serif;
     margin-bottom: 5%;
+    min-height: 1200px;
 }
 
 .rankingBack {
@@ -21,7 +29,7 @@
     margin-right: auto;
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 2%;
+    padding-top: 1%;
     padding-bottom: 5%;
     font-size: 200%;
 }
@@ -37,6 +45,32 @@
     box-shadow: 1px 1px 1px 1px gray;
 }
 
+.RankingCardBody {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.RankingCardtext {
+    display: flex;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.RankingCardLeft{
+    width: 180px;
+    margin-bottom: 0px !important;
+    font-size: 2rem !important;
+    display: flex !important;
+}
+
+.RankingCardRight{
+    padding-top: 8px !important ;
+}
+.RankingCardBadge{
+    display: inline !important;
+    font-size: 1.2rem !important;
+}
 .rankingImg{
     margin-left:2.5%;
     margin-right:2.5%;
@@ -45,6 +79,7 @@
 .marketBack {
     display: flex;
     flex-wrap: wrap;
+    min-height: 1000px;
 }
 
 .marketTxt {
@@ -75,20 +110,8 @@
 .marketCardBody {
     height: 100%;
     display: flex;
-    justify-content: start;
     padding:1rem !important;
     padding-left: 3rem !important;
-}
-
-.RankingCardBody {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.RankingCardtext {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .marketCardTitle{
