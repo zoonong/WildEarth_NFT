@@ -1,9 +1,9 @@
 import logo from './logo.svg';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
 
-import { BrowserRouter, Route, Routes, useParams,useNavigate} from 'react-router-dom';
-import { Navbar,Container, Nav, Alert, Button } from 'react-bootstrap';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Navbar,Container, Nav } from 'react-bootstrap';
 import Animal from './pages/Animal';
 import Homepage from './pages/Homepage';
 import Explore from './pages/Explore';
