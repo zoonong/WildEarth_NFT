@@ -5,7 +5,6 @@ import logo from '../logo.svg';
 import { Card,DropdownButton, Dropdown, Spinner, Badge } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './/pagecss/Explore.css';
-import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 import Caver from 'caver-js';
 import '../App.css';
 import {CONTRACTADDRESS, ABI} from '../config';
@@ -16,7 +15,7 @@ const option = {
   headers: [
     {
       name: "Authorization",
-      value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+      value: "Basic " + Buffer.from(process.env.REACT_APP_ACCESS_KEY_ID +":"+ process.env.REACT_APP_SECRET_ACCESS_KEY).toString("base64")
     },
     {name: "x-chain-id", value:CHAIN_ID}
   ]

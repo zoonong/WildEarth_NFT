@@ -11,8 +11,6 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Buy from './pages/Buy.js';
 import ScrollToTop from './ScrollTop';
-
-import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from './apikey';
 import Caver from 'caver-js';
 import './App.css';
 
@@ -22,7 +20,7 @@ const option = {
   headers: [
     {
       name: "Authorization",
-      value: "Basic " + Buffer.from(ACCESS_KEY_ID +":"+ SECRET_ACCESS_KEY).toString("base64")
+      value: "Basic " + Buffer.from(process.env.REACT_APP_ACCESS_KEY_ID +":"+ process.env.REACT_APP_SECRET_ACCESS_KEY).toString("base64")
     },
     {name: "x-chain-id", value:CHAIN_ID}
   ]

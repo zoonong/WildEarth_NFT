@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import axios from 'axios';
 import {CONTRACTADDRESS, ABI} from '../config';
 import Caver from 'caver-js';
-import {ACCESS_KEY_ID, SECRET_ACCESS_KEY} from '../apikey';
 
 var profile_name = 'DEFAULT_NAME'
 var profile_no = '0000'
