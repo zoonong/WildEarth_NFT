@@ -122,7 +122,7 @@ function Ranking({NFT_name,NFT_url, NFT_price, NFT_number}){
                 <Card.Body className='RankingCardBody'>
                     <Card.Text className='RankingCardtext'>
                         <h3 className='RankingCardLeft' style={{display:"inline"}}>{NFT_name} #{NFT_number}</h3>
-                        {show && <h6 className='RankingCardRight' style={{display:"inline", marginLeft:"10px"}}><Badge className='RankingCardBadge' bg="warning" text="dark" width="30px">ON SALE</Badge></h6>}
+                        {/* {show && <h6 className='RankingCardRight' style={{display:"inline", marginLeft:"10px"}}><Badge className='RankingCardBadge' bg="warning" text="dark" width="30px">ON SALE</Badge></h6>} */}
                     </Card.Text>
                 </Card.Body>
             </Card>
